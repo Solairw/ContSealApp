@@ -20,19 +20,20 @@ namespace ContSealApp
         {
             try
             {
-                string inputText = inputContBox.Text; // разбить на строки
+                string inputText = inputContBox.Text;
+                string inputIndex = inputSealBox.Text;
                 string[] newText = inputText.Split('\n');
-                outputTextBox.Text = newText[2];
+
+                int n = Convert.ToInt32(inputIndex);
+                outputTextBox.Text = newText[n];
+                using StreamWriter outputText = new("Result.txt", true); // запись результатов в файл
+                outputText.WriteLine(newText[n]);
+
             }
             catch (FormatException ex)
             {
                 outputTextBox.Text = "Ошибка - " + ex.Message;
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

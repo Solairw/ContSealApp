@@ -80,9 +80,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(276, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 21);
+            this.label2.Size = new System.Drawing.Size(113, 21);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Seals";
+            this.label2.Text = "Index Of String";
             // 
             // label3
             // 
@@ -100,7 +100,6 @@
             this.inputSealBox.Name = "inputSealBox";
             this.inputSealBox.Size = new System.Drawing.Size(223, 423);
             this.inputSealBox.TabIndex = 7;
-            this.inputSealBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // inputForm1
             // 
