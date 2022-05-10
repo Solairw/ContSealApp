@@ -22,11 +22,12 @@ namespace ContSealApp
             {
                 string inputText = inputContBox.Text;
                 string inputIndex = inputSealBox.Text;
+
                 string[] newText = inputText.Split('\n');
 
                 int n = Convert.ToInt32(inputIndex);
                 outputTextBox.Text = newText[n - 1];
-                using StreamWriter outputText = new("Result.txt", true); // запись результатов в файл
+                using StreamWriter outputText = new("Result.xls", true); // запись результатов в файл
                 outputText.WriteLine(newText[n - 1]);
 
             }
