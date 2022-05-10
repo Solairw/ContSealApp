@@ -28,39 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inputTextBox = new System.Windows.Forms.TextBox();
+            this.inputContBox = new System.Windows.Forms.TextBox();
             this.startButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.inputSealBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // inputTextBox
+            // inputContBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(13, 13);
-            this.inputTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.inputTextBox.Multiline = true;
-            this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.inputTextBox.Size = new System.Drawing.Size(338, 447);
-            this.inputTextBox.TabIndex = 1;
+            this.inputContBox.Location = new System.Drawing.Point(13, 58);
+            this.inputContBox.Margin = new System.Windows.Forms.Padding(4);
+            this.inputContBox.Multiline = true;
+            this.inputContBox.Name = "inputContBox";
+            this.inputContBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.inputContBox.Size = new System.Drawing.Size(232, 423);
+            this.inputContBox.TabIndex = 1;
             // 
             // startButton
             // 
             this.startButton.Location = new System.Drawing.Point(13, 489);
             this.startButton.Margin = new System.Windows.Forms.Padding(4);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(339, 45);
+            this.startButton.Size = new System.Drawing.Size(232, 45);
             this.startButton.TabIndex = 2;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // outputTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(377, 13);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(338, 447);
-            this.textBox1.TabIndex = 3;
+            this.outputTextBox.Location = new System.Drawing.Point(532, 58);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.outputTextBox.Multiline = true;
+            this.outputTextBox.Name = "outputTextBox";
+            this.outputTextBox.Size = new System.Drawing.Size(221, 423);
+            this.outputTextBox.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 21);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Containers";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(276, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 21);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Seals";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(532, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 21);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Result";
+            // 
+            // inputSealBox
+            // 
+            this.inputSealBox.Location = new System.Drawing.Point(276, 58);
+            this.inputSealBox.Multiline = true;
+            this.inputSealBox.Name = "inputSealBox";
+            this.inputSealBox.Size = new System.Drawing.Size(223, 423);
+            this.inputSealBox.TabIndex = 7;
+            this.inputSealBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // inputForm1
             // 
@@ -68,10 +108,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(731, 550);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(771, 550);
+            this.Controls.Add(this.inputSealBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.startButton);
-            this.Controls.Add(this.inputTextBox);
+            this.Controls.Add(this.inputContBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -84,8 +128,12 @@
         }
 
         #endregion
-        private TextBox inputTextBox;
+        private TextBox inputContBox;
         private Button startButton;
-        private TextBox textBox1;
+        private TextBox outputTextBox;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private TextBox inputSealBox;
     }
 }
