@@ -25,9 +25,9 @@ namespace ContSealApp
                 string[] newText = inputText.Split('\n');
 
                 int n = Convert.ToInt32(inputIndex);
-                outputTextBox.Text = newText[n];
+                outputTextBox.Text = newText[n - 1];
                 using StreamWriter outputText = new("Result.txt", true); // запись результатов в файл
-                outputText.WriteLine(newText[n]);
+                outputText.WriteLine(newText[n - 1]);
 
             }
             catch (FormatException ex)
