@@ -35,7 +35,7 @@
             this.outputWeightBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.wheightMultiplyerValueBox = new System.Windows.Forms.TextBox();
+            this.weightMultiplyerValueBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -108,12 +108,12 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Weight";
             // 
-            // wheightMultiplyerValueBox
+            // weightMultiplyerValueBox
             // 
-            this.wheightMultiplyerValueBox.Location = new System.Drawing.Point(275, 191);
-            this.wheightMultiplyerValueBox.Name = "wheightMultiplyerValueBox";
-            this.wheightMultiplyerValueBox.Size = new System.Drawing.Size(144, 29);
-            this.wheightMultiplyerValueBox.TabIndex = 11;
+            this.weightMultiplyerValueBox.Location = new System.Drawing.Point(275, 191);
+            this.weightMultiplyerValueBox.Name = "weightMultiplyerValueBox";
+            this.weightMultiplyerValueBox.Size = new System.Drawing.Size(144, 29);
+            this.weightMultiplyerValueBox.TabIndex = 11;
             // 
             // label2
             // 
@@ -132,7 +132,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(778, 591);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.wheightMultiplyerValueBox);
+            this.Controls.Add(this.weightMultiplyerValueBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.outputWeightBox);
@@ -159,7 +159,7 @@
         private TextBox outputWeightBox;
         private Label label3;
         private Label label4;
-        private TextBox wheightMultiplyerValueBox;
+        private TextBox weightMultiplyerValueBox;
         private Label label2;
     }
 }

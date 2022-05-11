@@ -37,7 +37,7 @@ namespace ContSealApp
                 for (int b = 0; b < sealsList.Length; b++)
                 {
                     string weight = sealsList[b].Substring(11, sealsList[b].Length - 11);
-                    int multiplyerValue = int.Parse(wheightMultiplyerValueBox.Text);
+                    int multiplyerValue = int.Parse(weightMultiplyerValueBox.Text);
                     outputWeightBox.Text += Convert.ToDouble(weight) * multiplyerValue;
                 }
 
