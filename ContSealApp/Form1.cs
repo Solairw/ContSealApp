@@ -22,28 +22,28 @@ namespace ContSealApp
             try
             {
                 string inputText = Regex.Replace(inputBox.Text, @"\.", ",");
-                string[] newText = inputText.Split('\n'); // разделяем текст на строки
+                string[] containersList = inputText.Split('\n');
+                string[] sealsList = inputText.Split('\n');
 
                 //разделяем номер контейнера и вес и отправляем в нужные окна
                 outputContainersBox.Clear();
-                for (int b = 0; b < newText.Length; b++)
+                for (int b = 0; b < containersList.Length; b++)
                 {
-                    newText[b] = newText[b].Substring(0, 12);
-                    outputContainersBox.Text += newText[b];
+                    containersList[b] = containersList[b].Substring(0, 12);
+                    outputContainersBox.Text += containersList[b];
                 }
 
                 outputWeightBox.Clear();
-                for (int b = 0; b < newText.Length; b++)
+                for (int b = 0; b < sealsList.Length; b++)
                 {
-                    string weight = newText[b].Substring(13, newText[b].Length - 1);
-                    int intWeight = int.Parse(weight) * 1000;
-                    outputWeightBox.Text += newText[b];
+                    string weight = sealsList[b].Substring(11, sealsList[b].Length - 11);
+                    outputWeightBox.Text += Convert.ToDouble(weight) * 1000;
                 }
 
-                
-                // запись результатов в файл
-                //using StreamWriter outputText = new("Result.xls", true); 
-                //outputText.WriteLine(newText[n - 1]);
+                //запись результатов в файл
+                using StreamWriter outputText = new("Result.xls", true);
+                outputText.WriteLine(containersList);
+                outputText.WriteLine(sealsList);
 
             }
             catch (FormatException ex)

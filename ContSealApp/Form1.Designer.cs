@@ -63,7 +63,7 @@
             this.outputContainersBox.Margin = new System.Windows.Forms.Padding(4);
             this.outputContainersBox.Multiline = true;
             this.outputContainersBox.Name = "outputContainersBox";
-            this.outputContainersBox.Size = new System.Drawing.Size(221, 423);
+            this.outputContainersBox.Size = new System.Drawing.Size(176, 423);
             this.outputContainersBox.TabIndex = 3;
             // 
             // label1
@@ -77,11 +77,11 @@
             // 
             // outputWeightBox
             // 
-            this.outputWeightBox.Location = new System.Drawing.Point(534, 58);
+            this.outputWeightBox.Location = new System.Drawing.Point(501, 58);
             this.outputWeightBox.Margin = new System.Windows.Forms.Padding(4);
             this.outputWeightBox.Multiline = true;
             this.outputWeightBox.Name = "outputWeightBox";
-            this.outputWeightBox.Size = new System.Drawing.Size(221, 423);
+            this.outputWeightBox.Size = new System.Drawing.Size(145, 423);
             this.outputWeightBox.TabIndex = 8;
             // 
             // label3
@@ -96,7 +96,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(534, 21);
+            this.label4.Location = new System.Drawing.Point(501, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 21);
             this.label4.TabIndex = 10;
@@ -108,7 +108,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(774, 550);
+            this.ClientSize = new System.Drawing.Size(661, 550);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.outputWeightBox);
