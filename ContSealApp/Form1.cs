@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace ContSealApp
 {
-    public partial class inputForm1 : Form
+    public partial class InputForm1 : Form
     {
-        public inputForm1()
+        public InputForm1()
         {
             InitializeComponent();
             startButton.Click += StartButton_Click;
@@ -20,20 +21,34 @@ namespace ContSealApp
         {
             try
             {
-                string inputText = inputContBox.Text;
-                string inputIndex = inputSealBox.Text;
+                string inputText = Regex.Replace(inputBox.Text, @"\.", ",");
+                string[] newText = inputText.Split('\n'); // разделяем текст на строки
 
-                string[] newText = inputText.Split('\n');
+                //разделяем номер контейнера и вес и отправляем в нужные окна
+                outputContainersBox.Clear();
+                for (int b = 0; b < newText.Length; b++)
+                {
+                    newText[b] = newText[b].Substring(0, 12);
+                    outputContainersBox.Text += newText[b];
+                }
 
-                int n = Convert.ToInt32(inputIndex);
-                outputTextBox.Text = newText[n - 1];
-                using StreamWriter outputText = new("Result.xls", true); // запись результатов в файл
-                outputText.WriteLine(newText[n - 1]);
+                outputWeightBox.Clear();
+                for (int b = 0; b < newText.Length; b++)
+                {
+                    string weight = newText[b].Substring(13, newText[b].Length - 1);
+                    int intWeight = int.Parse(weight) * 1000;
+                    outputWeightBox.Text += newText[b];
+                }
+
+                
+                // запись результатов в файл
+                //using StreamWriter outputText = new("Result.xls", true); 
+                //outputText.WriteLine(newText[n - 1]);
 
             }
             catch (FormatException ex)
             {
-                outputTextBox.Text = "Ошибка - " + ex.Message;
+                MessageBox.Show("Ошибка - " + ex.Message);
             }
         }
     }

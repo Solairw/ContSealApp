@@ -1,6 +1,6 @@
 ﻿namespace ContSealApp
 {
-    partial class inputForm1
+    partial class InputForm1
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inputContBox = new System.Windows.Forms.TextBox();
+            this.inputBox = new System.Windows.Forms.TextBox();
             this.startButton = new System.Windows.Forms.Button();
-            this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.outputContainersBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.outputWeightBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.inputSealBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // inputContBox
+            // inputBox
             // 
-            this.inputContBox.Location = new System.Drawing.Point(13, 58);
-            this.inputContBox.Margin = new System.Windows.Forms.Padding(4);
-            this.inputContBox.Multiline = true;
-            this.inputContBox.Name = "inputContBox";
-            this.inputContBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.inputContBox.Size = new System.Drawing.Size(232, 423);
-            this.inputContBox.TabIndex = 1;
+            this.inputBox.Location = new System.Drawing.Point(13, 58);
+            this.inputBox.Margin = new System.Windows.Forms.Padding(4);
+            this.inputBox.Multiline = true;
+            this.inputBox.Name = "inputBox";
+            this.inputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.inputBox.Size = new System.Drawing.Size(232, 423);
+            this.inputBox.TabIndex = 1;
             // 
             // startButton
             // 
@@ -57,68 +57,69 @@
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             // 
-            // outputTextBox
+            // outputContainersBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(532, 58);
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.outputTextBox.Multiline = true;
-            this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.Size = new System.Drawing.Size(221, 423);
-            this.outputTextBox.TabIndex = 3;
+            this.outputContainersBox.Location = new System.Drawing.Point(305, 58);
+            this.outputContainersBox.Margin = new System.Windows.Forms.Padding(4);
+            this.outputContainersBox.Multiline = true;
+            this.outputContainersBox.Name = "outputContainersBox";
+            this.outputContainersBox.Size = new System.Drawing.Size(221, 423);
+            this.outputContainersBox.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 21);
+            this.label1.Size = new System.Drawing.Size(46, 21);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Containers";
+            this.label1.Text = "Input";
             // 
-            // label2
+            // outputWeightBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(276, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 21);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "String No.";
+            this.outputWeightBox.Location = new System.Drawing.Point(534, 58);
+            this.outputWeightBox.Margin = new System.Windows.Forms.Padding(4);
+            this.outputWeightBox.Multiline = true;
+            this.outputWeightBox.Name = "outputWeightBox";
+            this.outputWeightBox.Size = new System.Drawing.Size(221, 423);
+            this.outputWeightBox.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(532, 21);
+            this.label3.Location = new System.Drawing.Point(305, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 21);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Result";
+            this.label3.Size = new System.Drawing.Size(85, 21);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Containers";
             // 
-            // inputSealBox
+            // label4
             // 
-            this.inputSealBox.Location = new System.Drawing.Point(276, 58);
-            this.inputSealBox.Multiline = true;
-            this.inputSealBox.Name = "inputSealBox";
-            this.inputSealBox.Size = new System.Drawing.Size(223, 423);
-            this.inputSealBox.TabIndex = 7;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(534, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 21);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Weight";
             // 
-            // inputForm1
+            // InputForm1
             // 
             this.AcceptButton = this.startButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(771, 550);
-            this.Controls.Add(this.inputSealBox);
+            this.ClientSize = new System.Drawing.Size(774, 550);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.outputWeightBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.outputTextBox);
+            this.Controls.Add(this.outputContainersBox);
             this.Controls.Add(this.startButton);
-            this.Controls.Add(this.inputContBox);
+            this.Controls.Add(this.inputBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "inputForm1";
+            this.Name = "InputForm1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ContTextApp";
             this.ResumeLayout(false);
@@ -127,12 +128,12 @@
         }
 
         #endregion
-        private TextBox inputContBox;
+        private TextBox inputBox;
         private Button startButton;
-        private TextBox outputTextBox;
+        private TextBox outputContainersBox;
         private Label label1;
-        private Label label2;
+        private TextBox outputWeightBox;
         private Label label3;
-        private TextBox inputSealBox;
+        private Label label4;
     }
 }
