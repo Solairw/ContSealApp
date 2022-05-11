@@ -35,6 +35,8 @@
             this.outputWeightBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.wheightMultiplyerValueBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inputBox
@@ -49,7 +51,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(13, 489);
+            this.startButton.Location = new System.Drawing.Point(13, 533);
             this.startButton.Margin = new System.Windows.Forms.Padding(4);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(232, 45);
@@ -59,11 +61,13 @@
             // 
             // outputContainersBox
             // 
-            this.outputContainersBox.Location = new System.Drawing.Point(305, 58);
+            this.outputContainersBox.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
+            this.outputContainersBox.Location = new System.Drawing.Point(439, 58);
             this.outputContainersBox.Margin = new System.Windows.Forms.Padding(4);
             this.outputContainersBox.Multiline = true;
             this.outputContainersBox.Name = "outputContainersBox";
-            this.outputContainersBox.Size = new System.Drawing.Size(176, 423);
+            this.outputContainersBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.outputContainersBox.Size = new System.Drawing.Size(167, 423);
             this.outputContainersBox.TabIndex = 3;
             // 
             // label1
@@ -77,17 +81,19 @@
             // 
             // outputWeightBox
             // 
-            this.outputWeightBox.Location = new System.Drawing.Point(501, 58);
+            this.outputWeightBox.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
+            this.outputWeightBox.Location = new System.Drawing.Point(614, 58);
             this.outputWeightBox.Margin = new System.Windows.Forms.Padding(4);
             this.outputWeightBox.Multiline = true;
             this.outputWeightBox.Name = "outputWeightBox";
-            this.outputWeightBox.Size = new System.Drawing.Size(145, 423);
+            this.outputWeightBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.outputWeightBox.Size = new System.Drawing.Size(126, 423);
             this.outputWeightBox.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(305, 21);
+            this.label3.Location = new System.Drawing.Point(439, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 21);
             this.label3.TabIndex = 9;
@@ -96,11 +102,27 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(501, 21);
+            this.label4.Location = new System.Drawing.Point(614, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 21);
             this.label4.TabIndex = 10;
             this.label4.Text = "Weight";
+            // 
+            // wheightMultiplyerValueBox
+            // 
+            this.wheightMultiplyerValueBox.Location = new System.Drawing.Point(275, 191);
+            this.wheightMultiplyerValueBox.Name = "wheightMultiplyerValueBox";
+            this.wheightMultiplyerValueBox.Size = new System.Drawing.Size(144, 29);
+            this.wheightMultiplyerValueBox.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(275, 157);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(135, 21);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight Multiplyer";
             // 
             // InputForm1
             // 
@@ -108,7 +130,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(661, 550);
+            this.ClientSize = new System.Drawing.Size(778, 591);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.wheightMultiplyerValueBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.outputWeightBox);
@@ -135,5 +159,7 @@
         private TextBox outputWeightBox;
         private Label label3;
         private Label label4;
+        private TextBox wheightMultiplyerValueBox;
+        private Label label2;
     }
 }

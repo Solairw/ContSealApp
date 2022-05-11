@@ -25,7 +25,7 @@ namespace ContSealApp
                 string[] containersList = inputText.Split('\n');
                 string[] sealsList = inputText.Split('\n');
 
-                //разделяем номер контейнера и вес и отправляем в нужные окна
+                //разделяем номер контейнера и вес и отправляем в нужные окна + возможность выбора множителя для веса
                 outputContainersBox.Clear();
                 for (int b = 0; b < containersList.Length; b++)
                 {
@@ -37,13 +37,14 @@ namespace ContSealApp
                 for (int b = 0; b < sealsList.Length; b++)
                 {
                     string weight = sealsList[b].Substring(11, sealsList[b].Length - 11);
-                    outputWeightBox.Text += Convert.ToDouble(weight) * 1000;
+                    int multiplyerValue = int.Parse(wheightMultiplyerValueBox.Text);
+                    outputWeightBox.Text += Convert.ToDouble(weight) * multiplyerValue;
                 }
 
                 //запись результатов в файл
-                using StreamWriter outputText = new("Result.xls", true);
-                outputText.WriteLine(containersList);
-                outputText.WriteLine(sealsList);
+                //using StreamWriter outputText = new("Result.csv", true);
+                //outputText.WriteLine(containersList);
+                //outputText.WriteLine(sealsList);
 
             }
             catch (FormatException ex)
