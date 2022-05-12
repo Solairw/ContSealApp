@@ -35,8 +35,10 @@
             this.outputWeightBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.weightMultiplyerValueBox = new System.Windows.Forms.TextBox();
+            this.weightMultiplierValueBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.testBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inputBox
@@ -108,21 +110,41 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Weight";
             // 
-            // weightMultiplyerValueBox
+            // weightMultiplierValueBox
             // 
-            this.weightMultiplyerValueBox.Location = new System.Drawing.Point(275, 191);
-            this.weightMultiplyerValueBox.Name = "weightMultiplyerValueBox";
-            this.weightMultiplyerValueBox.Size = new System.Drawing.Size(144, 29);
-            this.weightMultiplyerValueBox.TabIndex = 11;
+            this.weightMultiplierValueBox.Location = new System.Drawing.Point(275, 191);
+            this.weightMultiplierValueBox.Name = "weightMultiplierValueBox";
+            this.weightMultiplierValueBox.Size = new System.Drawing.Size(144, 29);
+            this.weightMultiplierValueBox.TabIndex = 11;
+            this.weightMultiplierValueBox.Text = "1000";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(275, 157);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 21);
+            this.label2.Size = new System.Drawing.Size(131, 21);
             this.label2.TabIndex = 12;
-            this.label2.Text = "Weight Multiplyer";
+            this.label2.Text = "Weight Multiplier";
+            // 
+            // testBox1
+            // 
+            this.testBox1.Location = new System.Drawing.Point(748, 58);
+            this.testBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.testBox1.Multiline = true;
+            this.testBox1.Name = "testBox1";
+            this.testBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.testBox1.Size = new System.Drawing.Size(227, 423);
+            this.testBox1.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(748, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 21);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Test Box";
             // 
             // InputForm1
             // 
@@ -130,9 +152,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(778, 591);
+            this.ClientSize = new System.Drawing.Size(1156, 591);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.testBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.weightMultiplyerValueBox);
+            this.Controls.Add(this.weightMultiplierValueBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.outputWeightBox);
@@ -159,7 +183,9 @@
         private TextBox outputWeightBox;
         private Label label3;
         private Label label4;
-        private TextBox weightMultiplyerValueBox;
+        private TextBox weightMultiplierValueBox;
         private Label label2;
+        private TextBox testBox1;
+        private Label label5;
     }
 }
