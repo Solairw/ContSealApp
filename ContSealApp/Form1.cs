@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ContSealApp
 {
@@ -44,7 +45,7 @@ namespace ContSealApp
                     string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
                     containerList[n] = temp[0];
                     weightList[n] = temp[1];
-                    
+
                     //разбиваем на 2 массива - контейнер + пломба
                     string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
                     containerList2[n] = temp2[0];
@@ -60,16 +61,16 @@ namespace ContSealApp
                     {
                         (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[i]);
                         outputBox.Text += containerInfo;
-                        
+
                         //запись результатов в файл
                         using StreamWriter outputText = new("Result.csv", true);
                         outputText.WriteLine(containerInfo);
                     }
-                    else 
+                    else
                     {
                         containerList2[i] = "Номер контейнера не найден, кожаный мешок!";
                         outputBox.Text += containerList2[i];
-                        
+
                         //запись результатов в файл
                         using StreamWriter outputText = new("Result.csv", true);
                         outputText.WriteLine(containerList2[i]);
@@ -80,6 +81,26 @@ namespace ContSealApp
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
+        }
+
+        // Чтение из книги Excel.
+        static void Excel(string[] args)
+        {
+            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
+            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(@"d:\kursy\C#\Spiski\Spisok.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
+            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
+            var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
+            string[,] list = new string[lastCell.Column, lastCell.Row]; // массив значений с листа равен по размеру листу
+            for (int i = 0; i < (int)lastCell.Column; i++) //по всем колонкам
+                for (int j = 0; j < (int)lastCell.Row; j++) // по всем строкам
+                    list[i, j] = ObjWorkSheet.Cells[j + 1, i + 1].Text.ToString();//считываем текст в строку
+            ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
+            ObjWorkExcel.Quit(); // выйти из экселя
+            GC.Collect(); // убрать за собой
+            for (int i = 1; i < (int)lastCell.Column; i++) //по всем колонкам
+                for (int j = 1; j < (int)lastCell.Row; j++) // по всем строкам 
+                    Console.Write(list[i, j]);//выводим строку
+            Console.ReadLine();
         }
     }
 }
