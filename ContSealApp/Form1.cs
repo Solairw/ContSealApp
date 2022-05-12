@@ -19,27 +19,24 @@ namespace ContSealApp
         }
         private void StartButton_Click(object? sender, EventArgs e)
         {
-            outputContainersBox.Clear();
-            outputWeightBox.Clear();
-            outputSealBox.Clear();
-                testBox1.Clear();
+            outputBox.Clear();
 
             try
             {
+                //множитель для веса
+                int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
+
                 //изначальные данные из окна input 1 
-                string inputText = Regex.Replace(inputBox.Text, @"\.", ",");
+                string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
                 string[] inputList = inputText.Split('\n');
                 string[] containerList = new string[inputList.Length];
                 string[] weightList = new string[inputList.Length];
 
-                //данные из окна input 2 - прикрутить чтение из файла 
-                string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",");
+                //данные из окна input 2
+                string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim(); // - прикрутить чтение из файла 
                 string[] inputList2 = inputText2.Split('\n');
                 string[] containerList2 = new string[inputList2.Length];
                 string[] sealList = new string[inputList2.Length];
-                
-                //множитель для веса
-                int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
 
                 for (int n = 0; n < inputList.Length; n++)
                 {
@@ -47,14 +44,11 @@ namespace ContSealApp
                     string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
                     containerList[n] = temp[0];
                     weightList[n] = temp[1];
-                    outputContainersBox.Text += containerList[n];
-                    outputWeightBox.Text += Convert.ToDouble(weightList[n]) * multiplierValue;
                     
                     //разбиваем на 2 массива - контейнер + пломба
                     string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
                     containerList2[n] = temp2[0];
                     sealList[n] = temp2[1];
-                    outputSealBox.Text += sealList[n];
                 }
 
                 //сравниваем два массива контейнеров. При совпадении номера контейнера берем индекс
@@ -65,16 +59,21 @@ namespace ContSealApp
                     if (containerList[i] == containerList2[i])
                     {
                         (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[i]);
-                        testBox1.Text += containerInfo;
+                        outputBox.Text += containerInfo;
+                        
+                        //запись результатов в файл
+                        using StreamWriter outputText = new("Result.csv", true);
+                        outputText.WriteLine(containerInfo);
                     }
                     else 
                     {
                         containerList2[i] = "Номер контейнера не найден, кожаный мешок!";
-                        testBox1.Text += containerList2[i];
+                        outputBox.Text += containerList2[i];
+                        
+                        //запись результатов в файл
+                        using StreamWriter outputText = new("Result.csv", true);
+                        outputText.WriteLine(containerList2[i]);
                     }
-                ////запись результатов в файл
-                //using StreamWriter outputText = new("Result.csv", true);
-                //outputText.WriteLine(containerInfo);
                 }
             }
             catch (FormatException ex)
