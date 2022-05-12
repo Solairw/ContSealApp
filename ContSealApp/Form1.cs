@@ -22,29 +22,45 @@ namespace ContSealApp
             try
             {
                 string inputText = Regex.Replace(inputBox.Text, @"\.", ",");
-                //inputText = Regex.Replace(inputBox.Text, @"\t", " ");
-                string[] containersList = inputText.Split('\n');
-                string[] weightList = inputText.Split('\n');
+
+                string[] inputList = inputText.Split('\n');
+                string[] containerList = new string[inputList.Length];
+                string[] weightList = new string[inputList.Length];
+                int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
 
                 outputContainersBox.Clear();
                 outputWeightBox.Clear();
                 testBox1.Clear();
 
-                for (int b = 0; b < containersList.Length; b++)
+                for (int n = 0; n < inputList.Length; n++)
                 {
-                    //выделяем номер контейнера - в окно Containers
-                    containersList[b] = containersList[b].Substring(0, 11);
-                    outputContainersBox.Text += containersList[b];
-
-                    //выделяем вес и перемножаем на множитель - в окно Weight 
-                    string weight = weightList[b].Substring(12, weightList[b].Length - 12);
-                    int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
-                    outputWeightBox.Text += Convert.ToDouble(weight) * multiplierValue;
-
-                    //заносим данные в кортеж  - (string, double, string) containerInfo - в окно Test Box
-                    (string, string) containerInfo = (containersList[b].Substring(0, 11), weightList[b].Substring(12, weightList[b].Length - 12));
-                    testBox1.Text += containerInfo;
+                    string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
+                    containerList[n] = temp[0];
+                    weightList[n] = temp[1];
+                    outputContainersBox.Text += containerList[n];
+                    outputWeightBox.Text += Convert.ToDouble(weightList[n]) * multiplierValue;
                 }
+
+                //foreach (var containerNumber in containersList)
+                //{
+                //    outputContainersBox.Text += containerNumber + " ";
+                //}
+
+                //for (int b = 0; b < containersList.Length; b++)
+                //{
+                //    //выделяем номер контейнера - в окно Containers
+                //    containersList[b] = containersList[b].Substring(0, 11);
+                //    outputContainersBox.Text += containersList[b];
+
+                //    //выделяем вес и перемножаем на множитель - в окно Weight 
+                //    string weight = weightList[b].Substring(12, weightList[b].Length - 12);
+                //    int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
+                //    outputWeightBox.Text += Convert.ToDouble(weight) * multiplierValue;
+
+                //    //заносим данные в кортеж  - (string, double, string) containerInfo - в окно Test Box
+                //    (string, string) containerInfo = (containersList[b].Substring(0, 11), weightList[b].Substring(12, weightList[b].Length - 12));
+                //    testBox1.Text += containerInfo;
+                //}
 
                 //*int.Parse(weightMultiplyerValueBox.Text
                 //помещаем блок в цикл. выводим результац циклом в виде кортежа
