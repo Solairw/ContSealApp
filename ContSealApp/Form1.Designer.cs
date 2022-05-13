@@ -37,6 +37,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.inputBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.totalContainersBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inputBox
@@ -83,7 +85,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(236, 158);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 17);
+            this.label2.Size = new System.Drawing.Size(108, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Weight Multiplier";
             // 
@@ -102,7 +104,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(632, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(156, 21);
+            this.label5.Size = new System.Drawing.Size(157, 21);
             this.label5.TabIndex = 14;
             this.label5.Text = "Cntr + Weight + Seal";
             // 
@@ -126,6 +128,22 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "Input2";
             // 
+            // totalContainersBox
+            // 
+            this.totalContainersBox.Location = new System.Drawing.Point(803, 533);
+            this.totalContainersBox.Name = "totalContainersBox";
+            this.totalContainersBox.Size = new System.Drawing.Size(84, 29);
+            this.totalContainersBox.TabIndex = 20;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(753, 536);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 21);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Total";
+            // 
             // InputForm1
             // 
             this.AcceptButton = this.startButton;
@@ -133,6 +151,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(924, 591);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.totalContainersBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.inputBox2);
             this.Controls.Add(this.label5);
@@ -163,5 +183,7 @@
         private Label label5;
         private TextBox inputBox2;
         private Label label7;
+        private TextBox totalContainersBox;
+        private Label label3;
     }
 }

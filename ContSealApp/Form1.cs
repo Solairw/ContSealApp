@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ContSealApp
 {
@@ -52,30 +52,23 @@ namespace ContSealApp
                     sealList[n] = temp2[1];
                 }
 
-                //сравниваем два массива контейнеров. ѕри совпадении номера контейнера берем индекс
-                //изначального и выводим пломбу по индексу из совпавшего + вес из изначального индекса
-                //else - ошибка о не найденом номере контейнера
                 for (int i = 0; i < inputList.Length; i++)
                 {
-                    if (containerList[i] == containerList2[i])
+                    for (int k = 0; k < inputList2.Length; k++)
                     {
-                        (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[i]);
-                        outputBox.Text += containerInfo;
+                        if (containerList[i] == containerList2[k])
+                        {
+                            (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[k]);
+                            outputBox.Text += containerInfo;
 
-                        //запись результатов в файл
-                        using StreamWriter outputText = new("Result.csv", true);
-                        outputText.WriteLine(containerInfo);
-                    }
-                    else
-                    {
-                        containerList2[i] = "Ќомер контейнера не найден, кожаный мешок!";
-                        outputBox.Text += containerList2[i];
-
-                        //запись результатов в файл
-                        using StreamWriter outputText = new("Result.csv", true);
-                        outputText.WriteLine(containerList2[i]);
+                            //запись результатов в файл
+                            using StreamWriter outputText = new("Result.csv", true);
+                            outputText.WriteLine(containerInfo);
+                            break;
+                        }
                     }
                 }
+                totalContainersBox.Text += 
             }
             catch (FormatException ex)
             {
@@ -84,23 +77,23 @@ namespace ContSealApp
         }
 
         // „тение из книги Excel.
-        static void Excel(string[] args)
-        {
-            Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
-            Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(@"d:\kursy\C#\Spiski\Spisok.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-            Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
-            var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 €чейку
-            string[,] list = new string[lastCell.Column, lastCell.Row]; // массив значений с листа равен по размеру листу
-            for (int i = 0; i < (int)lastCell.Column; i++) //по всем колонкам
-                for (int j = 0; j < (int)lastCell.Row; j++) // по всем строкам
-                    list[i, j] = ObjWorkSheet.Cells[j + 1, i + 1].Text.ToString();//считываем текст в строку
-            ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохран€€
-            ObjWorkExcel.Quit(); // выйти из эксел€
-            GC.Collect(); // убрать за собой
-            for (int i = 1; i < (int)lastCell.Column; i++) //по всем колонкам
-                for (int j = 1; j < (int)lastCell.Row; j++) // по всем строкам 
-                    Console.Write(list[i, j]);//выводим строку
-            Console.ReadLine();
-        }
+        //static void Excel(string[] args)
+        //{
+        //    Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
+        //    Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(@"d:\kursy\C#\Spiski\Spisok.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
+        //    Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
+        //    var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 €чейку
+        //    string[,] list = new string[lastCell.Column, lastCell.Row]; // массив значений с листа равен по размеру листу
+        //    for (int i = 0; i < (int)lastCell.Column; i++) //по всем колонкам
+        //        for (int j = 0; j < (int)lastCell.Row; j++) // по всем строкам
+        //            list[i, j] = ObjWorkSheet.Cells[j + 1, i + 1].Text.ToString();//считываем текст в строку
+        //    ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохран€€
+        //    ObjWorkExcel.Quit(); // выйти из эксел€
+        //    GC.Collect(); // убрать за собой
+        //    for (int i = 1; i < (int)lastCell.Column; i++) //по всем колонкам
+        //        for (int j = 1; j < (int)lastCell.Row; j++) // по всем строкам 
+        //            Console.Write(list[i, j]);//выводим строку
+        //    Console.ReadLine();
+        //}
     }
 }
