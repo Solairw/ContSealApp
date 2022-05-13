@@ -66,9 +66,14 @@ namespace ContSealApp
                             outputText.WriteLine(containerInfo);
                             break;
                         }
+                        else if (!containerList2.Contains(containerList[i])) 
+                        {
+                            outputBox.Text += ($"{containerList[i]} - не найден!");
+                            break;
+                        }
                     }
                 }
-                totalContainersBox.Text += 
+                //totalContainersBox.Text += 
             }
             catch (FormatException ex)
             {
