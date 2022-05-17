@@ -16,11 +16,12 @@ namespace ContSealApp
         public InputForm1()
         {
             InitializeComponent();
-            startButton.Click += StartButton_Click;
+            StartButton.Click += StartButton_Click;
         }
         private void StartButton_Click(object? sender, EventArgs e)
         {
             outputBox.Clear();
+            totalContainersBox.Clear();
 
             try
             {
@@ -73,31 +74,37 @@ namespace ContSealApp
                         }
                     }
                 }
-                //totalContainersBox.Text += 
+                totalContainersBox.Text += containerList.Length;//вывод колличества элементов в массиве containerList
             }
             catch (FormatException ex)
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
         }
+
+        //Вернуть рабочий лист с заданным именем.
+        private static Excel.Worksheet FindSheet(Excel.Workbook workbook, string sheet_name)
+        {
+            foreach (Excel.Worksheet sheet in workbook.Sheets)
+            {
+                if (sheet.Name == sheet_name) return sheet;
+            }
+            return null;
+        }
+
         // Запись в книгу Excel.
-        private void writeToExcele_Click(object sender, EventArgs e)
+        private void WriteToExcel_Click(object sender, EventArgs e)
         {
             // Получить объект приложения Excel.
-            Excel.Application excel_app = new Excel.ApplicationClass();
+            Excel.Application excel_app = new Excel.Application();
 
-            // Сделать Excel видимым (необязательно).
+            // Сделать Excel видимым
             excel_app.Visible = true;
 
             // Откройте книгу.
-            Excel.Workbook workbook = excel_app.Workbooks.Open(
-                txtFile.Text,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing);
+            Excel.Workbook workbook = excel_app.Workbooks.Add(); // в качестве параметра можно передать шаблон
 
-            // Посмотрим, существует ли рабочий лист.
+            // Cуществует ли рабочий лист.
             string sheet_name = DateTime.Now.ToString("MM-dd-yy");
 
             Excel.Worksheet sheet = FindSheet(workbook, sheet_name);
@@ -142,7 +149,7 @@ namespace ContSealApp
             // Закройте сервер Excel.
             excel_app.Quit();
 
-            MessageBox.Show("Done");
+            MessageBox.Show("Выполнено!");
         }
     }
 }

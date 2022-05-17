@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.inputBox = new System.Windows.Forms.TextBox();
-            this.startButton = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.weightMultiplierValueBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,7 +39,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.totalContainersBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.writeToExcel = new System.Windows.Forms.Button();
+            this.WriteToExcel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inputBox
@@ -53,15 +53,15 @@
             this.inputBox.TabIndex = 1;
             this.inputBox.Text = "CLHU3902470 22.4\r\nTCLU3172470 22.34\r\nFESU2114840 22.35\r\nFICU3552444 20.55";
             // 
-            // startButton
+            // StartButton
             // 
-            this.startButton.Location = new System.Drawing.Point(13, 533);
-            this.startButton.Margin = new System.Windows.Forms.Padding(4);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(232, 45);
-            this.startButton.TabIndex = 2;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
+            this.StartButton.Location = new System.Drawing.Point(13, 533);
+            this.StartButton.Margin = new System.Windows.Forms.Padding(4);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(232, 45);
+            this.StartButton.TabIndex = 2;
+            this.StartButton.Text = "Start";
+            this.StartButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -145,23 +145,24 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
-            // writeToExcel
+            // WriteToExcel
             // 
-            this.writeToExcel.Location = new System.Drawing.Point(350, 533);
-            this.writeToExcel.Name = "writeToExcel";
-            this.writeToExcel.Size = new System.Drawing.Size(228, 45);
-            this.writeToExcel.TabIndex = 22;
-            this.writeToExcel.Text = "button1";
-            this.writeToExcel.UseVisualStyleBackColor = true;
+            this.WriteToExcel.Location = new System.Drawing.Point(350, 533);
+            this.WriteToExcel.Name = "WriteToExcel";
+            this.WriteToExcel.Size = new System.Drawing.Size(228, 45);
+            this.WriteToExcel.TabIndex = 22;
+            this.WriteToExcel.Text = "Write to File";
+            this.WriteToExcel.UseVisualStyleBackColor = true;
+            this.WriteToExcel.Click += new System.EventHandler(this.WriteToExcel_Click);
             // 
             // InputForm1
             // 
-            this.AcceptButton = this.startButton;
+            this.AcceptButton = this.StartButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(924, 591);
-            this.Controls.Add(this.writeToExcel);
+            this.Controls.Add(this.WriteToExcel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.totalContainersBox);
             this.Controls.Add(this.label7);
@@ -171,7 +172,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.weightMultiplierValueBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.inputBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -186,7 +187,7 @@
 
         #endregion
         private TextBox inputBox;
-        private Button startButton;
+        private Button StartButton;
         private Label label1;
         private TextBox weightMultiplierValueBox;
         private Label label2;
@@ -196,6 +197,6 @@
         private Label label7;
         private TextBox totalContainersBox;
         private Label label3;
-        private Button writeToExcel;
+        private Button WriteToExcel;
     }
 }
