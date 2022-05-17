@@ -23,23 +23,23 @@ namespace ContSealApp
             outputBox.Clear();
             totalContainersBox.Clear();
 
+            //множитель дл€ веса
+            int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
+
+            //изначальные данные из окна input 1 
+            string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
+            string[] inputList = inputText.Split('\n');
+            string[] containerList = new string[inputList.Length];
+            string[] weightList = new string[inputList.Length];
+
+            //данные из окна input 2
+            string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim(); // - прикрутить чтение из файла 
+            string[] inputList2 = inputText2.Split('\n');
+            string[] containerList2 = new string[inputList2.Length];
+            string[] sealList = new string[inputList2.Length];
+           
             try
             {
-                //множитель дл€ веса
-                int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
-
-                //изначальные данные из окна input 1 
-                string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
-                string[] inputList = inputText.Split('\n');
-                string[] containerList = new string[inputList.Length];
-                string[] weightList = new string[inputList.Length];
-
-                //данные из окна input 2
-                string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim(); // - прикрутить чтение из файла 
-                string[] inputList2 = inputText2.Split('\n');
-                string[] containerList2 = new string[inputList2.Length];
-                string[] sealList = new string[inputList2.Length];
-
                 for (int n = 0; n < inputList.Length; n++)
                 {
                     //разбиваем на 2 массива - контейнер + вес
@@ -62,9 +62,10 @@ namespace ContSealApp
                             (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[k]);
                             outputBox.Text += containerInfo;
 
-                            //запись результатов в файл
-                            using StreamWriter outputText = new("Result.csv", true);
-                            outputText.WriteLine(containerInfo);
+                            string[] outputContainerList = new string[] { containerInfo.Item1 };
+                            double[] outputWeightList = new double[] { containerInfo.Item2 };
+                            string[] outputSealList = new string[] { containerInfo.Item3 };
+                            
                             break;
                         }
                         else if (!containerList2.Contains(containerList[i])) 
@@ -111,19 +112,15 @@ namespace ContSealApp
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
 
-            // ƒобавьте данные в диапазон €чеек, диапазон зав€зать на длину массива
-            int[,] values =
+            // ƒобавьте данные в диапазон €чеек
+            string[,] values =
             {
-                { 2,  4,  6},
-                { 3,  6,  9},
-                { 4,  8, 12},
-                { 5, 10, 15},
+                { "1", "2", "3" },
             };
-            Excel.Range value_range = sheet.get_Range("A2", "C5");
+            Excel.Range value_range = sheet.get_Range("A2", "C5"); //диапазон зав€зать на длину массива
             value_range.Value2 = values;
 
-            // —охраните изменени€ и закройте книгу.
-            workbook.Close(true, Type.Missing, Type.Missing);
+            //workbook.Close(true, Type.Missing, Type.Missing);
             excel_app.Quit();
 
             MessageBox.Show("¬ыполнено!");
