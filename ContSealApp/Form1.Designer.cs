@@ -39,6 +39,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.totalContainersBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.writeToExcel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inputBox
@@ -144,6 +145,15 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
+            // writeToExcel
+            // 
+            this.writeToExcel.Location = new System.Drawing.Point(350, 533);
+            this.writeToExcel.Name = "writeToExcel";
+            this.writeToExcel.Size = new System.Drawing.Size(228, 45);
+            this.writeToExcel.TabIndex = 22;
+            this.writeToExcel.Text = "button1";
+            this.writeToExcel.UseVisualStyleBackColor = true;
+            // 
             // InputForm1
             // 
             this.AcceptButton = this.startButton;
@@ -151,6 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(924, 591);
+            this.Controls.Add(this.writeToExcel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.totalContainersBox);
             this.Controls.Add(this.label7);
@@ -185,5 +196,6 @@
         private Label label7;
         private TextBox totalContainersBox;
         private Label label3;
+        private Button writeToExcel;
     }
 }

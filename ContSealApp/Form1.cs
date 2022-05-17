@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-//using Excel = Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ContSealApp
 {
@@ -80,25 +80,69 @@ namespace ContSealApp
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
         }
+        // Запись в книгу Excel.
+        private void writeToExcele_Click(object sender, EventArgs e)
+        {
+            // Получить объект приложения Excel.
+            Excel.Application excel_app = new Excel.ApplicationClass();
 
-        // Чтение из книги Excel.
-        //static void Excel(string[] args)
-        //{
-        //    Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
-        //    Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(@"d:\kursy\C#\Spiski\Spisok.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing); //открыть файл
-        //    Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
-        //    var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
-        //    string[,] list = new string[lastCell.Column, lastCell.Row]; // массив значений с листа равен по размеру листу
-        //    for (int i = 0; i < (int)lastCell.Column; i++) //по всем колонкам
-        //        for (int j = 0; j < (int)lastCell.Row; j++) // по всем строкам
-        //            list[i, j] = ObjWorkSheet.Cells[j + 1, i + 1].Text.ToString();//считываем текст в строку
-        //    ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
-        //    ObjWorkExcel.Quit(); // выйти из экселя
-        //    GC.Collect(); // убрать за собой
-        //    for (int i = 1; i < (int)lastCell.Column; i++) //по всем колонкам
-        //        for (int j = 1; j < (int)lastCell.Row; j++) // по всем строкам 
-        //            Console.Write(list[i, j]);//выводим строку
-        //    Console.ReadLine();
-        //}
+            // Сделать Excel видимым (необязательно).
+            excel_app.Visible = true;
+
+            // Откройте книгу.
+            Excel.Workbook workbook = excel_app.Workbooks.Open(
+                txtFile.Text,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing);
+
+            // Посмотрим, существует ли рабочий лист.
+            string sheet_name = DateTime.Now.ToString("MM-dd-yy");
+
+            Excel.Worksheet sheet = FindSheet(workbook, sheet_name);
+            if (sheet == null)
+            {
+                // Добавить лист в конце.
+                sheet = (Excel.Worksheet)workbook.Sheets.Add(
+                    Type.Missing, workbook.Sheets[workbook.Sheets.Count],
+                    1, Excel.XlSheetType.xlWorksheet);
+                sheet.Name = DateTime.Now.ToString("MM-dd-yy");
+            }
+
+            // Добавить некоторые данные в отдельные ячейки.
+            sheet.Cells[1, 1] = "Контейнер";
+            sheet.Cells[1, 2] = "Вес";
+            sheet.Cells[1, 3] = "Пломба";
+
+            // Делаем этот диапазон ячеек жирным и красным.
+            Excel.Range header_range = sheet.get_Range("A1", "C1");
+            header_range.Font.Bold = true;
+            header_range.Font.Color =
+                System.Drawing.ColorTranslator.ToOle(
+                    System.Drawing.Color.Red);
+            header_range.Interior.Color =
+                System.Drawing.ColorTranslator.ToOle(
+                    System.Drawing.Color.Pink);
+
+            // Добавьте некоторые данные в диапазон ячеек.
+            int[,] values =
+            {
+                { 2,  4,  6},
+                { 3,  6,  9},
+                { 4,  8, 12},
+                { 5, 10, 15},
+            };
+            Excel.Range value_range = sheet.get_Range("A2", "C5");
+            value_range.Value2 = values;
+
+            // Сохраните изменения и закройте книгу.
+            workbook.Close(true, Type.Missing, Type.Missing);
+
+            // Закройте сервер Excel.
+            excel_app.Quit();
+
+            MessageBox.Show("Done");
+        }
     }
 }
