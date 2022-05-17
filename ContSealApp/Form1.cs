@@ -74,22 +74,12 @@ namespace ContSealApp
                         }
                     }
                 }
-                totalContainersBox.Text += containerList.Length;//вывод колличества элементов в массиве containerList
+                totalContainersBox.Text += containerList.Length;
             }
             catch (FormatException ex)
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
-        }
-
-        //Вернуть рабочий лист с заданным именем.
-        private static Excel.Worksheet FindSheet(Excel.Workbook workbook, string sheet_name)
-        {
-            foreach (Excel.Worksheet sheet in workbook.Sheets)
-            {
-                if (sheet.Name == sheet_name) return sheet;
-            }
-            return null;
         }
 
         // Запись в книгу Excel.
@@ -101,21 +91,10 @@ namespace ContSealApp
             // Сделать Excel видимым
             excel_app.Visible = true;
 
-            // Откройте книгу.
+            // Создать книгу.
             Excel.Workbook workbook = excel_app.Workbooks.Add(); // в качестве параметра можно передать шаблон
 
-            // Cуществует ли рабочий лист.
-            string sheet_name = DateTime.Now.ToString("MM-dd-yy");
-
-            Excel.Worksheet sheet = FindSheet(workbook, sheet_name);
-            if (sheet == null)
-            {
-                // Добавить лист в конце.
-                sheet = (Excel.Worksheet)workbook.Sheets.Add(
-                    Type.Missing, workbook.Sheets[workbook.Sheets.Count],
-                    1, Excel.XlSheetType.xlWorksheet);
-                sheet.Name = DateTime.Now.ToString("MM-dd-yy");
-            }
+            Excel.Worksheet sheet = (Excel.Worksheet)workbook.Sheets.Add();
 
             // Добавить некоторые данные в отдельные ячейки.
             sheet.Cells[1, 1] = "Контейнер";
@@ -127,10 +106,10 @@ namespace ContSealApp
             header_range.Font.Bold = true;
             header_range.Font.Color =
                 System.Drawing.ColorTranslator.ToOle(
-                    System.Drawing.Color.Red);
+                    System.Drawing.Color.Black);
             header_range.Interior.Color =
                 System.Drawing.ColorTranslator.ToOle(
-                    System.Drawing.Color.Pink);
+                    System.Drawing.Color.LightGreen);
 
             // Добавьте некоторые данные в диапазон ячеек.
             int[,] values =
@@ -145,8 +124,6 @@ namespace ContSealApp
 
             // Сохраните изменения и закройте книгу.
             workbook.Close(true, Type.Missing, Type.Missing);
-
-            // Закройте сервер Excel.
             excel_app.Quit();
 
             MessageBox.Show("Выполнено!");
