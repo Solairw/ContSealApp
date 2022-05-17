@@ -96,12 +96,12 @@ namespace ContSealApp
 
             Excel.Worksheet sheet = (Excel.Worksheet)workbook.Sheets.Add();
 
-            // Добавить некоторые данные в отдельные ячейки.
+            // Заголовки таблицы
             sheet.Cells[1, 1] = "Контейнер";
             sheet.Cells[1, 2] = "Вес";
             sheet.Cells[1, 3] = "Пломба";
 
-            // Делаем этот диапазон ячеек жирным и красным.
+            // Цвет шрифта/ячеек заголовка
             Excel.Range header_range = sheet.get_Range("A1", "C1");
             header_range.Font.Bold = true;
             header_range.Font.Color =
@@ -111,7 +111,7 @@ namespace ContSealApp
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
 
-            // Добавьте некоторые данные в диапазон ячеек.
+            // Добавьте данные в диапазон ячеек, диапазон завязать на длину массива
             int[,] values =
             {
                 { 2,  4,  6},
