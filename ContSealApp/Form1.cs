@@ -134,13 +134,13 @@ namespace ContSealApp
 
             MessageBox.Show("Выполнено!");
         }
-       
-        public string[] TextSplitToContainers(string input) 
+
+        public string[] TextSplitToContainers(string input)
         {
             input = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             string[] inputList = input.Split('\n');
             string[] containerList = new string[inputList.Length];
-           
+
             for (int n = 0; n < inputList.Length; n++)
             {
                 string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
@@ -162,31 +162,30 @@ namespace ContSealApp
             return weightList;
         }
 
+        public void ContainersCompare()
+        {
+            for (int i = 0; i < inputList.Length; i++)
+            {
+                for (int k = 0; k < inputList2.Length; k++)
+                {
+                    if (containerList[i] == containerList2[k])
+                    {
+                        (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[k]);
+                        outputBox.Text += containerInfo;
 
-            //public void ContainersCompare()
-            //{
-            //    for (int i = 0; i < inputList.Length; i++)
-            //    {
-            //        for (int k = 0; k < inputList2.Length; k++)
-            //        {
-            //            if (containerList[i] == containerList2[k])
-            //            {
-            //                (string, double, string) containerInfo = (containerList[i], Convert.ToDouble(weightList[i]) * multiplierValue, sealList[k]);
-            //                outputBox.Text += containerInfo;
+                        string[] outputContainerList = new string[] { containerInfo.Item1 };
+                        double[] outputWeightList = new double[] { containerInfo.Item2 };
+                        string[] outputSealList = new string[] { containerInfo.Item3 };
 
-            //                string[] outputContainerList = new string[] { containerInfo.Item1 };
-            //                double[] outputWeightList = new double[] { containerInfo.Item2 };
-            //                string[] outputSealList = new string[] { containerInfo.Item3 };
-
-            //                break;
-            //            }
-            //            else if (!containerList2.Contains(containerList[i]))
-            //            {
-            //                outputBox.Text += ($"{containerList[i]} - не найден!");
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    return;
+                        break;
+                    }
+                    else if (!containerList2.Contains(containerList[i]))
+                    {
+                        outputBox.Text += ($"{containerList[i]} - не найден!");
+                        break;
+                    }
+                }
+            }
         }
     }
+}
