@@ -36,16 +36,15 @@ namespace ContSealApp
 
             try
             {
-                //изначальные данные из окна input 1 
+                //изначальные данные из окна input 1 и input 2
                 string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
                 string[] inputList = inputText.Split('\n');
-                string[] containerList = new string[inputList.Length];
-                string[] weightList = new string[inputList.Length];
-
-                //данные из окна input 2
                 string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
                 string[] inputList2 = inputText2.Split('\n');
+                
+                string[] containerList = new string[inputList.Length];
                 string[] containerList2 = new string[inputList2.Length];
+                string[] weightList = new string[inputList.Length];
                 string[] sealList = new string[inputList2.Length];
 
                 for (int n = 0; n < inputList.Length; n++)
