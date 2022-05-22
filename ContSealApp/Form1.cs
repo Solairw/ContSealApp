@@ -11,7 +11,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ContSealApp
 {
-    class Container 
+    public class Container 
     {
         public string? containerNumber;
         public string? containerWeight;
@@ -115,22 +115,13 @@ namespace ContSealApp
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
 
-            // Добавьте данные в диапазон ячеек
-            for (int j = 1; j <= 0; j++)
+            for (int j = 1; j <= 100; j++)
             {
-                sheet.Cells[1, j] = j;
+                sheet.Cells[j+1, 1] = containerFromClient.containerNumber;
+                sheet.Cells[j+1, 2] = containerFromClient.containerWeight;
+                sheet.Cells[j+1, 3] = containerFromClient.containerSeal;
             }
-
-            string[,] values =
-            {
-                { "1", "2", "3" },
-            };
-            Excel.Range value_range = sheet.get_Range("A2", "C5");
-            value_range.Value2 = values;
-
-            workbook.Close(true, Type.Missing, Type.Missing);
             excel_app.Quit();
-
             MessageBox.Show("Выполнено!");
         }
     }
