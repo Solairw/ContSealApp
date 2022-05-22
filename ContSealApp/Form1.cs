@@ -60,23 +60,15 @@ namespace ContSealApp
                     containerList2[n] = temp2[0];
                     sealList[n] = temp2[1];
 
-                    Container containerFromClient = new()
+                    Container containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
+                    Container containerFromBase = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
+                                        
+                    if (containerFromClient.containerNumber == containerFromBase.containerNumber)
                     {
-                        containerNumber = containerList[n],
-                        containerWeight = weightList[n],
-                    };
-                    Container containerFromMyBase = new()
-                    {
-                        containerNumber = containerList2[n],
-                        containerSeal = sealList[n]
-                    };
-                    
-                    if (containerFromClient.containerNumber == containerFromMyBase.containerNumber)
-                    {
-                        containerFromClient.containerSeal = containerFromMyBase.containerSeal;
+                        containerFromClient.containerSeal = containerFromBase.containerSeal;
                         outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}";
                     }
-                    else if (containerFromClient.containerSeal != containerFromMyBase.containerSeal)
+                    else if (containerFromClient.containerSeal != containerFromBase.containerSeal)
                     {
                         outputBox.Text += ($"{containerFromClient.containerNumber} - не найден!");
                     }
