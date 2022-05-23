@@ -53,7 +53,7 @@ namespace ContSealApp
                     sealList[n] = temp2[1];
 
                     Container containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
-                    Container containerFromBase = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
+                    ContainerFromFile containerFromBase = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
                                         
                     if (containerFromClient.containerNumber == containerFromBase.containerNumber)
                     {
@@ -114,7 +114,7 @@ namespace ContSealApp
         {
             //Очищаем от старого текста окно вывода.
             testBox1.Clear();
-            string path = @"C:\Users\user\source\repos\Si02Vl\ContSealApp\Копия report.xls";
+            string path = @"C:\Users\user\source\repos\Si02Vl\ContSealApp\Report.xls";
 
             //Открываем файл Экселя
             //if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -128,9 +128,9 @@ namespace ContSealApp
                 {
                     //Выбираем область таблицы и выводим текст в форму
                     Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns[1];
-                    Array containerFromFileArray = (System.Array)containersRange.Value;
-                    string?[] containerFromFile = containerFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
-                    testBox1.Text += containerFromFile[i].ToString() + "\n";
+                    Array containersFromFileArray = (System.Array)containersRange.Value;
+                    string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
+                    testBox1.Text += containersFromFile[i].ToString() + "\n";
                 }
 
                 Application.DoEvents();
@@ -143,5 +143,10 @@ namespace ContSealApp
         public string? containerNumber;
         public string? containerWeight;
         public string? containerSeal;
+    }
+    public class ContainerFromFile : Container
+    {
+        new public string? containerNumber;
+        new public string? containerSeal;
     }
 }
