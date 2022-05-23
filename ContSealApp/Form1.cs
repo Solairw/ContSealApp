@@ -24,54 +24,56 @@ namespace ContSealApp
             outputBox.Clear();
             totalContainersBox.Clear();
             
-            //множитель дл€ веса
-            int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
+            //Wheight Multiplier
+            _ = int.Parse(weightMultiplierValueBox.Text);
+            //Initial Imput Text From Client To Form
+            _ = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
+           
+            //try
+            //{
+            //    //изначальные данные из окна input 1 и input 2
+            //    string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
+            //    string[] inputList = inputText.Split('\n');
+            //    string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
+            //    string[] inputList2 = inputText2.Split('\n');
 
-            try
-            {
-                //изначальные данные из окна input 1 и input 2
-                string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
-                string[] inputList = inputText.Split('\n');
-                string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
-                string[] inputList2 = inputText2.Split('\n');
-                
-                string[] containerList = new string[inputList.Length];
-                string[] containerList2 = new string[inputList2.Length];
-                string[] weightList = new string[inputList.Length];
-                string[] sealList = new string[inputList2.Length];
+            //    string[] containerList = new string[inputList.Length];
+            //    string[] containerList2 = new string[inputList2.Length];
+            //    string[] weightList = new string[inputList.Length];
+            //    string[] sealList = new string[inputList2.Length];
 
-                for (int n = 0; n < inputList.Length; n++)
-                {
-                    //разбиваем на 2 массива - контейнер + вес
-                    string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
-                    containerList[n] = temp[0];
-                    weightList[n] = temp[1];
-                    
-                    //разбиваем на 2 массива - контейнер + пломба
-                    string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
-                    containerList2[n] = temp2[0];
-                    sealList[n] = temp2[1];
+            //    for (int n = 0; n < inputList.Length; n++)
+            //    {
+            //        //разбиваем на 2 массива - контейнер + вес
+            //        string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
+            //        containerList[n] = temp[0];
+            //        weightList[n] = temp[1];
 
-                    ContainerFromClient containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
-                    ContainerFromFile containerFromFile = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
-                                        
-                    if (containerFromClient.containerNumber == containerFromFile.containerNumber)
-                    {
-                        containerFromClient.containerSeal = containerFromFile.containerSeal;
-                        outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}\n";
-                    }
-                    else if (containerFromClient.containerSeal != containerFromFile.containerSeal)
-                    {
-                        outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!" + "\n");
-                    }
-                }
+            //        //разбиваем на 2 массива - контейнер + пломба
+            //        string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
+            //        containerList2[n] = temp2[0];
+            //        sealList[n] = temp2[1];
 
-                totalContainersBox.Text += containerList.Length;
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("ќшибка - " + ex.Message);
-            }
+            //        ContainerFromClient containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
+            //        //ContainerFromFile containerFromFile = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
+
+            //        if (containerFromClient.containerNumber == containerFromFile.containerNumber)
+            //        {
+            //            containerFromClient.containerSeal = containerFromFile.containerSeal;
+            //            outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}\n";
+            //        }
+            //        else if (containerFromClient.containerSeal != containerFromFile.containerSeal)
+            //        {
+            //            outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!" + "\n");
+            //        }
+            //    }
+
+            //    totalContainersBox.Text += containerList.Length;
+            //}
+            //catch (FormatException ex)
+            //{
+            //    MessageBox.Show("ќшибка - " + ex.Message);
+            //}
         }
 
         // Write to Excel.
@@ -147,10 +149,25 @@ namespace ContSealApp
         public string? containerNumber;
         public string? containerWeight;
         public string? containerSeal;
+
+        public void InputTextSplitToContainersArray(string inputBox) 
+        {
+            string inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
+            string[] inputList = inputText.Split('\n');
+            string[] containerList = new string[inputList.Length];
+        }
+        public void InputTextSplitToWeightArray(string inputBox)
+        {
+            string inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
+            string[] inputList = inputText.Split('\n');
+            string[] containerList = new string[inputList.Length];
+        }
+
+
     }
-    public class ContainerFromFile : Container
-    {
-        public string? containerNumber;
-        public string? containerSeal;
-    }
+    //public class ContainerFromFile : Container
+    //{
+    //    public string? containerNumber;
+    //    public string? containerSeal;
+    //}
 }
