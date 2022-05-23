@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.inputBox = new System.Windows.Forms.TextBox();
-            this.StartButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.weightMultiplierValueBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,7 +39,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.totalContainersBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.WriteToExcel = new System.Windows.Forms.Button();
+            this.writeToExcel = new System.Windows.Forms.Button();
+            this.testBox1 = new System.Windows.Forms.TextBox();
+            this.testBox2 = new System.Windows.Forms.TextBox();
+            this.readFromExcel = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // inputBox
@@ -53,15 +57,15 @@
             this.inputBox.TabIndex = 1;
             this.inputBox.Text = "CLHU3902470 22.4\r\nTCLU3172470 22.34\r\nFESU2114840 22.35\r\nFICU3552444 20.55";
             // 
-            // StartButton
+            // startButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(13, 533);
-            this.StartButton.Margin = new System.Windows.Forms.Padding(4);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(232, 45);
-            this.StartButton.TabIndex = 2;
-            this.StartButton.Text = "Start";
-            this.StartButton.UseVisualStyleBackColor = true;
+            this.startButton.Location = new System.Drawing.Point(13, 533);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(232, 45);
+            this.startButton.TabIndex = 2;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -131,7 +135,7 @@
             // 
             // totalContainersBox
             // 
-            this.totalContainersBox.Location = new System.Drawing.Point(803, 533);
+            this.totalContainersBox.Location = new System.Drawing.Point(1158, 533);
             this.totalContainersBox.Name = "totalContainersBox";
             this.totalContainersBox.Size = new System.Drawing.Size(84, 29);
             this.totalContainersBox.TabIndex = 20;
@@ -139,30 +143,63 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(753, 536);
+            this.label3.Location = new System.Drawing.Point(1108, 536);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
-            // WriteToExcel
+            // writeToExcel
             // 
-            this.WriteToExcel.Location = new System.Drawing.Point(350, 533);
-            this.WriteToExcel.Name = "WriteToExcel";
-            this.WriteToExcel.Size = new System.Drawing.Size(228, 45);
-            this.WriteToExcel.TabIndex = 22;
-            this.WriteToExcel.Text = "Write to File";
-            this.WriteToExcel.UseVisualStyleBackColor = true;
-            this.WriteToExcel.Click += new System.EventHandler(this.WriteToExcel_Click);
+            this.writeToExcel.Location = new System.Drawing.Point(350, 533);
+            this.writeToExcel.Name = "writeToExcel";
+            this.writeToExcel.Size = new System.Drawing.Size(228, 45);
+            this.writeToExcel.TabIndex = 22;
+            this.writeToExcel.Text = "Write to File";
+            this.writeToExcel.UseVisualStyleBackColor = true;
+            this.writeToExcel.Click += new System.EventHandler(this.WriteToExcel_Click);
+            // 
+            // testBox1
+            // 
+            this.testBox1.Location = new System.Drawing.Point(915, 67);
+            this.testBox1.Multiline = true;
+            this.testBox1.Name = "testBox1";
+            this.testBox1.Size = new System.Drawing.Size(149, 423);
+            this.testBox1.TabIndex = 23;
+            // 
+            // testBox2
+            // 
+            this.testBox2.Location = new System.Drawing.Point(1093, 67);
+            this.testBox2.Multiline = true;
+            this.testBox2.Name = "testBox2";
+            this.testBox2.Size = new System.Drawing.Size(149, 423);
+            this.testBox2.TabIndex = 24;
+            // 
+            // readFromExcel
+            // 
+            this.readFromExcel.Location = new System.Drawing.Point(620, 533);
+            this.readFromExcel.Name = "readFromExcel";
+            this.readFromExcel.Size = new System.Drawing.Size(228, 45);
+            this.readFromExcel.TabIndex = 25;
+            this.readFromExcel.Text = "Read From Excel";
+            this.readFromExcel.UseVisualStyleBackColor = true;
+            this.readFromExcel.Click += new System.EventHandler(this.ReadFromExcel_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // InputForm1
             // 
-            this.AcceptButton = this.StartButton;
+            this.AcceptButton = this.startButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(924, 591);
-            this.Controls.Add(this.WriteToExcel);
+            this.ClientSize = new System.Drawing.Size(1275, 591);
+            this.Controls.Add(this.readFromExcel);
+            this.Controls.Add(this.testBox2);
+            this.Controls.Add(this.testBox1);
+            this.Controls.Add(this.writeToExcel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.totalContainersBox);
             this.Controls.Add(this.label7);
@@ -172,7 +209,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.weightMultiplierValueBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.StartButton);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.inputBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -187,7 +224,7 @@
 
         #endregion
         private TextBox inputBox;
-        private Button StartButton;
+        private Button startButton;
         private Label label1;
         private TextBox weightMultiplierValueBox;
         private Label label2;
@@ -197,6 +234,10 @@
         private Label label7;
         private TextBox totalContainersBox;
         private Label label3;
-        private Button WriteToExcel;
+        private Button writeToExcel;
+        private TextBox testBox1;
+        private TextBox testBox2;
+        private Button readFromExcel;
+        private OpenFileDialog openFileDialog1;
     }
 }

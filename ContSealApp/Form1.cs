@@ -11,19 +11,12 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ContSealApp
 {
-    public class Container 
-    {
-        public string? containerNumber;
-        public string? containerWeight;
-        public string? containerSeal;
-    }
-    
     public partial class InputForm1 : Form
     {
         public InputForm1()
         {
             InitializeComponent();
-            StartButton.Click += StartButton_Click;
+            startButton.Click += StartButton_Click;
         }
 
         public void StartButton_Click(object? sender, EventArgs e)
@@ -65,11 +58,11 @@ namespace ContSealApp
                     if (containerFromClient.containerNumber == containerFromBase.containerNumber)
                     {
                         containerFromClient.containerSeal = containerFromBase.containerSeal;
-                        outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}";
+                        outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}\n";
                     }
                     else if (containerFromClient.containerSeal != containerFromBase.containerSeal)
                     {
-                        outputBox.Text += ($"{containerFromClient.containerNumber} - не найден!");
+                        outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!");
                     }
                 }
 
@@ -106,14 +99,48 @@ namespace ContSealApp
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
 
-            for (int j = 1; j <= 100; j++)
-            {
-                sheet.Cells[j+1, 1] = containerFromClient.containerNumber;
-                sheet.Cells[j+1, 2] = containerFromClient.containerWeight;
-                sheet.Cells[j+1, 3] = containerFromClient.containerSeal;
-            }
+            //for (int j = 1; j <= 100; j++)
+            //{
+            //    sheet.Cells[j+1, 1] = containerFromClient.containerNumber;
+            //    sheet.Cells[j+1, 2] = containerFromClient.containerWeight;
+            //    sheet.Cells[j+1, 3] = containerFromClient.containerSeal;
+            //}
             excel_app.Quit();
             MessageBox.Show("Выполнено!");
         }
+
+        private void ReadFromExcel_Click(object sender, EventArgs e)
+        {
+            //Очищаем от старого текста окно вывода.
+            testBox1.Clear();
+
+            //Открываем файл Экселя
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Создаём приложение.
+                Excel.Application ObjExcel = new ();                                                                                                                                                      
+                Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open(openFileDialog1.FileName);
+                Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1];
+
+                for (int i = 1; i < 10; i++)
+                {
+                    //Выбираем область таблицы
+                    Excel.Range containersRange = ObjWorkSheet.Range["A1"];
+                    Excel.Range sealsRange = ObjWorkSheet.Range["B1"];
+                    //Добавляем полученный текст.
+                    testBox1.Text = containersRange.Text.ToString() + "\n";
+                    testBox2.Text = sealsRange.Text.ToString() + "\n";
+
+                    Application.DoEvents();
+                }
+                ObjExcel.Quit();
+            }
+        }
+    }
+    public class Container
+    {
+        public string? containerNumber;
+        public string? containerWeight;
+        public string? containerSeal;
     }
 }
