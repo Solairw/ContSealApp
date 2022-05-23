@@ -114,7 +114,7 @@ namespace ContSealApp
         {
             //Очищаем от старого текста окно вывода.
             testBox1.Clear();
-            string path = @"C:\Users\user\Desktop\Копия report.xls";
+            string path = @"C:\Users\user\source\repos\Si02Vl\ContSealApp\Копия report.xls";
 
             //Открываем файл Экселя
             //if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -124,11 +124,13 @@ namespace ContSealApp
                 Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open(path); //(openFileDialog1.FileName);
                 Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1];
 
-                for (int i = 1; i < 10; i++) 
+                for (int i = 1; i < 52; i++) // определять длину столбца автоматически
                 {
                     //Выбираем область таблицы и выводим текст в форму
-                    Excel.Range containersRange = ObjWorkSheet.Range["A" + i];
-                    testBox1.Text = containersRange.Text.ToString() + "\n";
+                    Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns[1];
+                    Array containerFromFileArray = (System.Array)containersRange.Value;
+                    string?[] containerFromFile = containerFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    testBox1.Text += containerFromFile[i].ToString() + "\n";
                 }
 
                 Application.DoEvents();
