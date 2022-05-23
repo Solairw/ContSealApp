@@ -52,15 +52,15 @@ namespace ContSealApp
                     containerList2[n] = temp2[0];
                     sealList[n] = temp2[1];
 
-                    Container containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
-                    ContainerFromFile containerFromBase = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
+                    ContainerFromClient containerFromClient = new() { containerNumber = containerList[n], containerWeight = weightList[n] };
+                    ContainerFromFile containerFromFile = new() { containerNumber = containerList2[n], containerSeal = sealList[n] };
                                         
-                    if (containerFromClient.containerNumber == containerFromBase.containerNumber)
+                    if (containerFromClient.containerNumber == containerFromFile.containerNumber)
                     {
-                        containerFromClient.containerSeal = containerFromBase.containerSeal;
+                        containerFromClient.containerSeal = containerFromFile.containerSeal;
                         outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}\n";
                     }
-                    else if (containerFromClient.containerSeal != containerFromBase.containerSeal)
+                    else if (containerFromClient.containerSeal != containerFromFile.containerSeal)
                     {
                         outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!" + "\n");
                     }
@@ -127,18 +127,22 @@ namespace ContSealApp
                 for (int i = 1; i < 52; i++) // определ€ть длину столбца автоматически
                 {
                     //¬ыбираем область таблицы и выводим текст в форму
-                    Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns[1];
+                    Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns["A"];
                     Array containersFromFileArray = (System.Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
                     testBox1.Text += containersFromFile[i].ToString() + "\n";
-                }
 
+                    Excel.Range sealsRange = ObjWorkSheet.UsedRange.Columns["B"];
+                    Array sealsFromFileArray = (System.Array)sealsRange.Value;
+                    string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
+                    testBox2.Text += sealsFromFile[i].ToString() + "\n";
+                }
                 Application.DoEvents();
                 ObjExcel.Quit();
             }
         }
     }
-    public class Container
+    public class ContainerFromClient
     {
         public string? containerNumber;
         public string? containerWeight;
@@ -146,7 +150,7 @@ namespace ContSealApp
     }
     public class ContainerFromFile : Container
     {
-        new public string? containerNumber;
-        new public string? containerSeal;
+        public string? containerNumber;
+        public string? containerSeal;
     }
 }
