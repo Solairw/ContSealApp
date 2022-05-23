@@ -62,7 +62,7 @@ namespace ContSealApp
                     }
                     else if (containerFromClient.containerSeal != containerFromBase.containerSeal)
                     {
-                        outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!");
+                        outputBox.Text += ($"{containerFromClient.containerNumber} - совпадений не найдено!" + "\n");
                     }
                 }
 
@@ -108,31 +108,30 @@ namespace ContSealApp
             excel_app.Quit();
             MessageBox.Show("Выполнено!");
         }
-
+        
+        //Read from excel
         private void ReadFromExcel_Click(object sender, EventArgs e)
         {
             //Очищаем от старого текста окно вывода.
             testBox1.Clear();
+            string path = @"C:\Users\user\Desktop\Копия report.xls";
 
             //Открываем файл Экселя
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Создаём приложение.
-                Excel.Application ObjExcel = new ();                                                                                                                                                      
-                Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open(openFileDialog1.FileName);
+                Excel.Application ObjExcel = new ();
+                Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open(path); //(openFileDialog1.FileName);
                 Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1];
 
-                for (int i = 1; i < 10; i++)
+                for (int i = 1; i < 10; i++) 
                 {
-                    //Выбираем область таблицы
-                    Excel.Range containersRange = ObjWorkSheet.Range["A1"];
-                    Excel.Range sealsRange = ObjWorkSheet.Range["B1"];
-                    //Добавляем полученный текст.
+                    //Выбираем область таблицы и выводим текст в форму
+                    Excel.Range containersRange = ObjWorkSheet.Range["A" + i];
                     testBox1.Text = containersRange.Text.ToString() + "\n";
-                    testBox2.Text = sealsRange.Text.ToString() + "\n";
-
-                    Application.DoEvents();
                 }
+
+                Application.DoEvents();
                 ObjExcel.Quit();
             }
         }
