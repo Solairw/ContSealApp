@@ -17,29 +17,30 @@ namespace ContSealApp
         {
             InitializeComponent();
             startButton.Click += StartButton_Click;
+            
         }
 
         public void StartButton_Click(object? sender, EventArgs e)
         {
             outputBox.Clear();
             totalContainersBox.Clear();
-            
+
             //Wheight Multiplier
             _ = int.Parse(weightMultiplierValueBox.Text);
             //Initial Imput Text From Client To Form
             _ = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
-           
+
             //try
             //{
             //    //изначальные данные из окна input 1 и input 2
             //    string inputText = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             //    string[] inputList = inputText.Split('\n');
+            //    string[] containerList = new string[inputList.Length];           
+            //    string[] weightList = new string[inputList.Length];
+            //
             //    string inputText2 = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
             //    string[] inputList2 = inputText2.Split('\n');
-
-            //    string[] containerList = new string[inputList.Length];
             //    string[] containerList2 = new string[inputList2.Length];
-            //    string[] weightList = new string[inputList.Length];
             //    string[] sealList = new string[inputList2.Length];
 
             //    for (int n = 0; n < inputList.Length; n++)
@@ -150,20 +151,21 @@ namespace ContSealApp
         public string? containerWeight;
         public string? containerSeal;
 
-        public void InputTextSplitToContainersArray(string inputBox) 
+        public void InputTextSplitToContainersAndWeightArray(string inputText, string  inputBox)
         {
-            string inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
+            inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
             string[] inputList = inputText.Split('\n');
             string[] containerList = new string[inputList.Length];
-        }
-        public void InputTextSplitToWeightArray(string inputBox)
-        {
-            string inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
-            string[] inputList = inputText.Split('\n');
-            string[] containerList = new string[inputList.Length];
-        }
+            string[] weightList = new string[inputList.Length];
 
-
+            for (int n = 0; n < inputList.Length; n++)
+            {
+                //разбиваем на 2 массива - контейнер + вес
+                string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
+                containerList[n] = temp[0];
+                weightList[n] = temp[1];
+            }
+        }
     }
     //public class ContainerFromFile : Container
     //{

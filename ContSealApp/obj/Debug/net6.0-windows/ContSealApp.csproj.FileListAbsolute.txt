@@ -42,7 +42,6 @@ D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\bin\Debug\net6.0-windows\Co
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.csproj.AssemblyReference.cache
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.csproj.ResolveComReference.cache
-D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.Container.resources
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.csproj.GenerateResource.cache
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.GeneratedMSBuildEditorConfig.editorconfig
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.AssemblyInfoInputs.cache
@@ -53,3 +52,4 @@ D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\re
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.pdb
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.genruntimeconfig.cache
 D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ref\ContSealApp.dll
+D:\Users\Si02\Desktop\Si02Vl\ContSealApp\ContSealApp\obj\Debug\net6.0-windows\ContSealApp.InputForm1.resources
