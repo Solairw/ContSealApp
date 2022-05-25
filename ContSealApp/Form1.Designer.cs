@@ -90,7 +90,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(236, 158);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 17);
+            this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Weight Multiplier";
             // 
@@ -109,7 +109,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(632, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(157, 21);
+            this.label5.Size = new System.Drawing.Size(156, 21);
             this.label5.TabIndex = 14;
             this.label5.Text = "Cntr + Weight + Seal";
             // 
@@ -145,7 +145,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1108, 536);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 21);
+            this.label3.Size = new System.Drawing.Size(42, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
@@ -228,7 +228,6 @@
         private Label label1;
         private TextBox weightMultiplierValueBox;
         private Label label2;
-        private TextBox outputBox;
         private Label label5;
         private TextBox inputBox2;
         private Label label7;
@@ -239,5 +238,6 @@
         private TextBox testBox2;
         private Button readFromExcel;
         private OpenFileDialog openFileDialog1;
+        public TextBox outputBox;
     }
 }
