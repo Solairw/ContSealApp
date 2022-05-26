@@ -27,58 +27,53 @@ namespace ContSealApp
 
             try
             {
-                InputTextToContainersAndWeights(inputBox.Text);
-                InputTextToContainersAndSeals(inputBox2.Text);
+                InputTextToContainersWeightsAndSeals(inputBox.Text, inputBox2.Text);
             }
             catch (FormatException ex)
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
         }
-        public void InputTextToContainersAndWeights(string inputBox)
-        {
-            string inputText = Regex.Replace(inputBox, @"\.", ",").Trim();
-            string[] inputList = inputText.Split('\n');
-            string[] containersList = new string[inputList.Length];
-            string[] weightsList = new string[inputList.Length];
 
-            for (int n = 0; n < inputList.Length; n++)
-            {
-                //разбиваем на 2 массива - контейнер + вес
-                string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
-                containersList[n] = temp[0];
-                weightsList[n] = temp[1];
-                ContainerFromClient containerFromClient = new() { containerNumber = containersList[n], containerWeight = weightsList[n] };
-                totalContainersBox.Text += containersList.Length;
-            }
-        }
-        public void InputTextToContainersAndSeals(string inputBox2)
+        public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string inputTextFromFile)
         {
-            string inputText = Regex.Replace(inputBox2, @"\.", ",").Trim();
-            string[] inputList = inputText.Split('\n');
-            string[] containersList2 = new string[inputList.Length];
-            string[] sealsList = new string[inputList.Length];
+            inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
+            inputTextFromFile = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
+            
+            string[] inputList1 = inputTextFromClient.Split('\n');
+            string[] inputList2 = inputTextFromFile.Split('\n');
+            
+            string[] containersList1 = new string[inputList1.Length];
+            string[] containersList2 = new string[inputList2.Length];
+            
+            string[] weightsList = new string[inputList1.Length];
+            string[] sealsList = new string[inputList2.Length];
 
-            for (int n = 0; n < inputList.Length; n++)
+            for (int n = 0; n < inputList1.Length; n++)
             {
-                //разбиваем на 2 массива - контейнер + вес
-                string[] temp = inputList[n].Split(new char[] { ' ', '\t' });
-                containersList2[n] = temp[0];
-                sealsList[n] = temp[1];
+                string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
+                containersList1[n] = temp1[0];
+                weightsList[n] = temp1[1];
+                string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
+                containersList2[n] = temp2[0];
+                sealsList[n] = temp2[1];
+                
+                ContainerFromClient containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
                 ContainerFromFile containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
-                ContainersCompare();
+                IfContainersCompareAddSeal(containerFromClient.containerNumber, containerFromFile.containerNumber);
             }
+            totalContainersBox.Text += containersList1.Length;
         }
-        public void ContainersCompare()
+        public void IfContainersCompareAddSeal(string containerFromClient, string containerFromFile)
         {
-            if (containerFromFile.containerNumber == containerFromFile.containerNumber)
+            if (containerFromClient == containerFromFile)
             {
-                containerFromClient.containerSeal = containerFromFile.containerSeal;
-                outputBox.Text += $"{containerFromClient.containerNumber}, {Convert.ToDouble(containerFromClient.containerWeight) * multiplierValue}, {containerFromClient.containerSeal}\n";
+                containerFromClient = containerFromFile;
+                outputBox.Text += $"{containerFromClient}, {Convert.ToDouble(containerFromClient)}, {containerFromClient}\n";
             }
-            else if (containerFromClient.containerSeal != containerFromFile.containerSeal)
+            else if (containerFromClient != containerFromFile)
             {
-                outputBox.Text += $"{containerFromClient.containerNumber} - совпадений не найдено!" + "\n";
+                outputBox.Text += $"{containerFromClient} - совпадений не найдено!" + "\n";
             }
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
