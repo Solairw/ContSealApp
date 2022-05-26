@@ -18,12 +18,11 @@ namespace ContSealApp
             InitializeComponent();
             startButton.Click += StartButton_Click;
         }
-
         public void StartButton_Click(object? sender, EventArgs e)
         {
             outputBox.Clear();
             totalContainersBox.Clear();
-            int multiplierValue = int.Parse(weightMultiplierValueBox.Text);
+            _ = int.Parse(weightMultiplierValueBox.Text);
 
             try
             {
@@ -34,18 +33,17 @@ namespace ContSealApp
                 MessageBox.Show("Œ¯Ë·Í‡ - " + ex.Message);
             }
         }
-
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string inputTextFromFile)
         {
             inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             inputTextFromFile = Regex.Replace(inputBox2.Text, @"\.", ",").Trim();
-            
+
             string[] inputList1 = inputTextFromClient.Split('\n');
             string[] inputList2 = inputTextFromFile.Split('\n');
-            
+
             string[] containersList1 = new string[inputList1.Length];
             string[] containersList2 = new string[inputList2.Length];
-            
+
             string[] weightsList = new string[inputList1.Length];
             string[] sealsList = new string[inputList2.Length];
 
@@ -54,10 +52,11 @@ namespace ContSealApp
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
+
                 string[] temp2 = inputList2[n].Split(new char[] { ' ', '\t' });
                 containersList2[n] = temp2[0];
                 sealsList[n] = temp2[1];
-                
+
                 ContainerFromClient containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
                 ContainerFromFile containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
                 IfContainersCompareAddSeal(containerFromClient.containerNumber, containerFromFile.containerNumber);
@@ -69,7 +68,7 @@ namespace ContSealApp
             if (containerFromClient == containerFromFile)
             {
                 containerFromClient = containerFromFile;
-                outputBox.Text += $"{containerFromClient}, {Convert.ToDouble(containerFromClient)}, {containerFromClient}\n";
+                outputBox.Text += $"{containerFromClient}, {containerFromClient}, {containerFromClient}\n"; //Convert.ToDouble
             }
             else if (containerFromClient != containerFromFile)
             {
@@ -129,19 +128,19 @@ namespace ContSealApp
                     Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns["A"];
                     Array containersFromFileArray = (System.Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
-                    testBox1.Text += containersFromFile[i].ToString() + "\n";
+                    testBox1.Text += $"{containersFromFile[i]}\n";
 
                     Excel.Range sealsRange = ObjWorkSheet.UsedRange.Columns["B"];
                     Array sealsFromFileArray = (System.Array)sealsRange.Value;
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
-                    testBox2.Text += sealsFromFile[i].ToString() + "\n";
+                    testBox2.Text += $"{sealsFromFile[i]}\n";
                 }
                 Application.DoEvents();
                 ObjExcel.Quit();
             }
         }
     }
-}
+
     public class ContainerFromClient
     {
         public string? containerNumber;
@@ -153,4 +152,4 @@ namespace ContSealApp
         new public string? containerNumber;
         new public string? containerSeal;
     }
-
+}
