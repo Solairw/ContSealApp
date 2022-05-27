@@ -104,6 +104,7 @@
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.outputBox.Size = new System.Drawing.Size(301, 423);
             this.outputBox.TabIndex = 13;
+            this.outputBox.WordWrap = false;
             // 
             // label5
             // 

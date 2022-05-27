@@ -31,7 +31,7 @@ namespace ContSealApp
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
-            totalContainersBox.Text += outputBox.Lines.Count();
+            //totalContainersBox.Text += outputBox.Lines.Count();
         }
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string inputTextFromFile)
         {
@@ -57,12 +57,12 @@ namespace ContSealApp
                 containersList2[n] = temp2[0];
                 sealsList[n] = temp2[1];
 
-                ContainerFromClient containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
-                ContainerFromFile containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
+                ContainerFromClientList containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
+                ContainerFromFileList containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
 
                 IfContainersTheSameAddSealAndShow(containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
             }
-            //totalContainersBox.Text += containersList1.Length;
+            totalContainersBox.Text += containersList1.Length;
         }
         public void IfContainersTheSameAddSealAndShow(string fromClient, string fromFile, string weight, string seal)
         {
@@ -70,11 +70,11 @@ namespace ContSealApp
             if (fromClient == fromFile)
             {
                 fromClient = fromFile;
-                outputBox.Text += $"{fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\n";
+                outputBox.Text += $"{fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
             }
             else if (fromClient != fromFile)
             {
-                outputBox.Text += $"{fromClient} - совпадений не найдено! \n";
+                outputBox.Text += $"{fromClient} - совпадений не найдено!\r\n";
             }
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
@@ -85,14 +85,14 @@ namespace ContSealApp
             };
 
             // Create new book and sheet
-            Excel.Workbook workbook = excel_app.Workbooks.Add();
-            Excel.Worksheet sheet = (Excel.Worksheet)workbook.Sheets.Add();
+            Excel.Workbook workBook = excel_app.Workbooks.Add();
+            Excel.Worksheet workSheet = (Excel.Worksheet)workBook.Sheets.Add();
 
-            sheet.Cells[1, 1] = "Контейнер";
-            sheet.Cells[1, 2] = "Вес";
-            sheet.Cells[1, 3] = "Пломба";
+            workSheet.Cells[1, 1] = "Контейнер";
+            workSheet.Cells[1, 2] = "Вес";
+            workSheet.Cells[1, 3] = "Пломба";
 
-            Excel.Range header_range = sheet.get_Range("A1", "C1");
+            Excel.Range header_range = workSheet.get_Range("A1", "C1");
             header_range.Font.Bold = true;
             header_range.Font.Color =
                 System.Drawing.ColorTranslator.ToOle(
@@ -101,14 +101,15 @@ namespace ContSealApp
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
 
-            //for (int j = 1; j <= 100; j++)
-            //{
-            //    sheet.Cells[j+1, 1] = containerFromClient.containerNumber;
-            //    sheet.Cells[j+1, 2] = containerFromClient.containerWeight;
-            //    sheet.Cells[j+1, 3] = containerFromClient.containerSeal;
-            //}
+            for (int j = 1; j <= 50; j++)
+            {
+                workSheet.Cells[j + 1, 1] = containerFromClient.containerNumber;
+                workSheet.Cells[j + 1, 2] = сontainerFromClient.containerWeight;
+                workSheet.Cells[j + 1, 3] = сontainerFromClient.containerSeal;
+            }
+            
             excel_app.Quit();
-            MessageBox.Show("Выполнено!");
+            MessageBox.Show("DONE!");
         }
         public void ReadFromExcel_Click(object sender, EventArgs e)
         {
@@ -143,13 +144,13 @@ namespace ContSealApp
         }
     }
 
-    public class ContainerFromClient
+    public class ContainerFromClientList
     {
         public string containerNumber;
         public string containerWeight;
         public string containerSeal;
     }
-    public class ContainerFromFile : ContainerFromClient
+    public class ContainerFromFileList : ContainerFromClientList
     {
         new public string containerNumber;
         new public string containerSeal;
