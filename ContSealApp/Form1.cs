@@ -22,7 +22,6 @@ namespace ContSealApp
         {
             outputBox.Clear();
             totalContainersBox.Clear();
-            _ = int.Parse(weightMultiplierValueBox.Text);
 
             try
             {
@@ -59,20 +58,22 @@ namespace ContSealApp
 
                 ContainerFromClient containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
                 ContainerFromFile containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
-                IfContainersCompareAddSeal(containerFromClient.containerNumber, containerFromFile.containerNumber);
+
+                IfContainersTheSameAddSealAndShow(containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
             }
             totalContainersBox.Text += containersList1.Length;
         }
-        public void IfContainersCompareAddSeal(string containerFromClient, string containerFromFile)
+        public void IfContainersTheSameAddSealAndShow(string fromClient, string fromFile, string weight, string seal)
         {
-            if (containerFromClient == containerFromFile)
+            int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
+            if (fromClient == fromFile)
             {
-                containerFromClient = containerFromFile;
-                outputBox.Text += $"{containerFromClient}, {containerFromClient}, {containerFromClient}\n"; //Convert.ToDouble
+                fromClient = fromFile;
+                outputBox.Text += $"{fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\n";
             }
-            else if (containerFromClient != containerFromFile)
+            else if (fromClient != fromFile)
             {
-                outputBox.Text += $"{containerFromClient} - совпадений не найдено!" + "\n";
+                outputBox.Text += $"{fromClient} - совпадений не найдено!\n";
             }
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
@@ -143,13 +144,13 @@ namespace ContSealApp
 
     public class ContainerFromClient
     {
-        public string? containerNumber;
-        public string? containerWeight;
-        public string? containerSeal;
+        public string containerNumber;
+        public string containerWeight;
+        public string containerSeal;
     }
     public class ContainerFromFile : ContainerFromClient
     {
-        new public string? containerNumber;
-        new public string? containerSeal;
+        new public string containerNumber;
+        new public string containerSeal;
     }
 }
