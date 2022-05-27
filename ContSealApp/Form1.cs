@@ -31,6 +31,7 @@ namespace ContSealApp
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
+            totalContainersBox.Text += outputBox.Lines.Count();
         }
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string inputTextFromFile)
         {
@@ -61,7 +62,7 @@ namespace ContSealApp
 
                 IfContainersTheSameAddSealAndShow(containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
             }
-            totalContainersBox.Text += containersList1.Length;
+            //totalContainersBox.Text += containersList1.Length;
         }
         public void IfContainersTheSameAddSealAndShow(string fromClient, string fromFile, string weight, string seal)
         {
@@ -73,7 +74,7 @@ namespace ContSealApp
             }
             else if (fromClient != fromFile)
             {
-                outputBox.Text += $"{fromClient} - совпадений не найдено!\n";
+                outputBox.Text += $"{fromClient} - совпадений не найдено! \n";
             }
         }
         public void WriteToExcel_Click(object sender, EventArgs e)

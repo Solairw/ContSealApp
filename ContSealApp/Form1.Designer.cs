@@ -48,6 +48,7 @@
             // 
             // inputBox
             // 
+            this.inputBox.AcceptsReturn = true;
             this.inputBox.Location = new System.Drawing.Point(13, 58);
             this.inputBox.Margin = new System.Windows.Forms.Padding(4);
             this.inputBox.Multiline = true;
@@ -90,7 +91,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(236, 158);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 17);
+            this.label2.Size = new System.Drawing.Size(108, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Weight Multiplier";
             // 
@@ -109,12 +110,13 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(632, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(156, 21);
+            this.label5.Size = new System.Drawing.Size(157, 21);
             this.label5.TabIndex = 14;
             this.label5.Text = "Cntr + Weight + Seal";
             // 
             // inputBox2
             // 
+            this.inputBox2.AcceptsReturn = true;
             this.inputBox2.Location = new System.Drawing.Point(350, 67);
             this.inputBox2.Margin = new System.Windows.Forms.Padding(4);
             this.inputBox2.Multiline = true;
@@ -145,7 +147,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1108, 536);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 21);
+            this.label3.Size = new System.Drawing.Size(44, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
