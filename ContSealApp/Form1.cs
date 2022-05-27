@@ -57,27 +57,27 @@ namespace ContSealApp
                 containersList2[n] = temp2[0];
                 sealsList[n] = temp2[1];
 
-                ContainerFromClientList containerFromClient = new() { containerNumber = containersList1[n], containerWeight = weightsList[n] };
-                ContainerFromFileList containerFromFile = new() { containerNumber = containersList2[n], containerSeal = sealsList[n] };
+                ContainerFromClientList containerFromClient = new() { ID = n + 1, containerNumber = containersList1[n], containerWeight = weightsList[n] };
+                ContainerFromFileList containerFromFile = new() { ID = n + 1, containerNumber = containersList2[n], containerSeal = sealsList[n] };
 
-                IfContainersTheSameAddSealAndShow(containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
+                IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
             }
             totalContainersBox.Text += containersList1.Length;
         }
-        public void IfContainersTheSameAddSealAndShow(string fromClient, string fromFile, string weight, string seal)
+        public void IfContainersTheSameAddSealAndShow(int id, string fromClient, string fromFile, string weight, string seal)
         {
             int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
             if (fromClient == fromFile)
             {
                 fromClient = fromFile;
-                outputBox.Text += $"{fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
+                outputBox.Text += $"{id} - {fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
             }
             else if (fromClient != fromFile)
             {
-                outputBox.Text += $"{fromClient} - ÒÓ‚Ô‡‰ÂÌËÈ ÌÂ Ì‡È‰ÂÌÓ!\r\n";
+                outputBox.Text += $"{id} - {fromClient} - ÒÓ‚Ô‡‰ÂÌËÈ ÌÂ Ì‡È‰ÂÌÓ!\r\n";
             }
         }
-        public void WriteToExcel_Click(object sender, EventArgs e)
+        public void WriteToExcel_Click(object sender, EventArgs e) //ref ContainerFromClientList containerNumber, ref ContainerFromClientList containerWeight, ref ContainerFromClientList containerSeal)
         {
             Excel.Application excel_app = new()
             {
@@ -100,16 +100,16 @@ namespace ContSealApp
             header_range.Interior.Color =
                 System.Drawing.ColorTranslator.ToOle(
                     System.Drawing.Color.LightGreen);
-
-            for (int j = 1; j <= 50; j++)
-            {
-                workSheet.Cells[j + 1, 1] = containerFromClient.containerNumber;
-                workSheet.Cells[j + 1, 2] = ÒontainerFromClient.containerWeight;
-                workSheet.Cells[j + 1, 3] = ÒontainerFromClient.containerSeal;
-            }
             
+            //for (int j = 1; j <= 50; j++)
+            //{
+            //    workSheet.Cells[j + 1, 1] = ref ;
+            //    workSheet.Cells[j + 1, 2] = containerWeight;
+            //    workSheet.Cells[j + 1, 3] = containerSeal;
+            //}
+
             excel_app.Quit();
-            MessageBox.Show("DONE!");
+            MessageBox.Show("Done!");
         }
         public void ReadFromExcel_Click(object sender, EventArgs e)
         {
@@ -146,6 +146,7 @@ namespace ContSealApp
 
     public class ContainerFromClientList
     {
+        public int ID = 0;
         public string containerNumber;
         public string containerWeight;
         public string containerSeal;
