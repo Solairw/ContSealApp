@@ -79,27 +79,23 @@ namespace ContSealApp
         }
         public void WriteToExcel_Click(object sender, EventArgs e) //ref ContainerFromClientList containerNumber, ref ContainerFromClientList containerWeight, ref ContainerFromClientList containerSeal)
         {
-            Excel.Application excel_app = new()
+            Excel.Application excelApp = new()
             {
                 Visible = true
             };
 
             // Create new book and sheet
-            Excel.Workbook workBook = excel_app.Workbooks.Add();
+            Excel.Workbook workBook = excelApp.Workbooks.Add();
             Excel.Worksheet workSheet = (Excel.Worksheet)workBook.Sheets.Add();
 
             workSheet.Cells[1, 1] = "Контейнер";
             workSheet.Cells[1, 2] = "Вес";
             workSheet.Cells[1, 3] = "Пломба";
 
-            Excel.Range header_range = workSheet.get_Range("A1", "C1");
-            header_range.Font.Bold = true;
-            header_range.Font.Color =
-                System.Drawing.ColorTranslator.ToOle(
-                    System.Drawing.Color.Black);
-            header_range.Interior.Color =
-                System.Drawing.ColorTranslator.ToOle(
-                    System.Drawing.Color.LightGreen);
+            Excel.Range headerRange = workSheet.get_Range("A1", "C1");
+            headerRange.Font.Bold = true;
+            headerRange.Font.Color = ColorTranslator.ToOle(Color.Black);
+            headerRange.Interior.Color = ColorTranslator.ToOle(Color.LightGreen);
             
             //for (int j = 1; j <= 50; j++)
             //{
@@ -108,7 +104,7 @@ namespace ContSealApp
             //    workSheet.Cells[j + 1, 3] = containerSeal;
             //}
 
-            excel_app.Quit();
+            excelApp.Quit();
             MessageBox.Show("Done!");
         }
         public void ReadFromExcel_Click(object sender, EventArgs e)
@@ -121,25 +117,25 @@ namespace ContSealApp
             //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Создаём приложение.
-                Excel.Application ObjExcel = new();
-                Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open(path); //(openFileDialog1.FileName);
-                Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1];
+                Excel.Application objExcel = new();
+                Excel.Workbook objWorkBook = objExcel.Workbooks.Open(path); //(openFileDialog1.FileName);
+                Excel.Worksheet objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
 
                 for (int i = 1; i < 52; i++) // определять длину столбца автоматически
                 {
                     //Выбираем область таблицы и выводим текст в форму
-                    Excel.Range containersRange = ObjWorkSheet.UsedRange.Columns["A"];
+                    Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
                     Array containersFromFileArray = (System.Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
                     testBox1.Text += $"{containersFromFile[i]}\n";
 
-                    Excel.Range sealsRange = ObjWorkSheet.UsedRange.Columns["B"];
+                    Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
                     Array sealsFromFileArray = (System.Array)sealsRange.Value;
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray(); //WTF?)
                     testBox2.Text += $"{sealsFromFile[i]}\n";
                 }
                 Application.DoEvents();
-                ObjExcel.Quit();
+                objExcel.Quit();
             }
         }
     }
