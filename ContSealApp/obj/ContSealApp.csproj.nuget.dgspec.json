@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {}
+    "C:\\Users\\elena\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {
+    "C:\\Users\\elena\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+        "projectUniqueName": "C:\\Users\\elena\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
         "projectName": "ContSealApp",
-        "projectPath": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+        "projectPath": "C:\\Users\\elena\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
         "packagesPath": "C:\\Users\\elena\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
+        "outputPath": "C:\\Users\\elena\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

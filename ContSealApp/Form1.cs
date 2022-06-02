@@ -26,7 +26,7 @@ namespace ContSealApp
 
             try
             {
-                InputTextToContainersWeightsAndSeals(inputBox.Text, ReadFromExcel());
+                InputTextToContainersWeightsAndSeals(inputBox.Text, containersFromFile, sealsFromFile);
             }
             catch (FormatException ex)
             {
