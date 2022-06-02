@@ -49,6 +49,9 @@ namespace ContSealApp
 
             for (int n = 0; n < inputList1.Length; n++)
             {
+                object[] ContainerFromClientList = new object[inputList1.Length];
+                object[] ContainerFromFileList = new object[inputList2.Length];
+
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
@@ -57,24 +60,24 @@ namespace ContSealApp
                 containersList2[n] = temp2[0];
                 sealsList[n] = temp2[1];
 
-                ContainerFromClientList containerFromClient = new() { ID = n + 1, containerNumber = containersList1[n], containerWeight = weightsList[n] };
-                ContainerFromFileList containerFromFile = new() { ID = n + 1, containerNumber = containersList2[n], containerSeal = sealsList[n] };
+                ContainerFromClientList containerFromClient = new() { ID = n, ContainerNumber = containersList1[n], ContainerWeight = weightsList[n] };
+                ContainerFromFileList containerFromFile = new() { ID = n, ContainerNumber = containersList2[n], ContainerSeal = sealsList[n] };
 
-                IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.containerNumber, containerFromFile.containerNumber, containerFromClient.containerWeight, containerFromFile.containerSeal);
+                IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
             }
             totalContainersBox.Text += containersList1.Length;
         }
-        public void IfContainersTheSameAddSealAndShow(int id, string fromClient, string fromFile, string weight, string seal)
+        public void IfContainersTheSameAddSealAndShow(int id, string numberFromClient, string numberFromFile, string weight, string seal)
         {
             int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
-            if (fromClient == fromFile)
+            if (numberFromClient == numberFromFile)
             {
-                fromClient = fromFile;
-                outputBox.Text += $"{id} - {fromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
+                numberFromClient = numberFromFile;
+                outputBox.Text += $"{id} - {numberFromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
             }
-            else if (fromClient != fromFile)
+            else if (numberFromClient != numberFromFile)
             {
-                outputBox.Text += $"{id} - {fromClient} - совпадений не найдено!\r\n";
+                outputBox.Text += $"{id} - {numberFromClient} - совпадений не найдено!\r\n";
             }
         }
         public void WriteToExcel_Click(object sender, EventArgs e) //ref ContainerFromClientList containerNumber, ref ContainerFromClientList containerWeight, ref ContainerFromClientList containerSeal)
@@ -111,14 +114,14 @@ namespace ContSealApp
         {
             //ќчищаем от старого текста окно вывода.
             testBox1.Clear();
-            string path = @"C:\Users\user\source\repos\Si02Vl\ContSealApp\Report.xls";
+            //string path = @"C:\Users\user\source\repos\Si02Vl\ContSealApp\Report.xls";
 
             //ќткрываем файл Ёксел€
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //—оздаЄм приложение.
                 Excel.Application objExcel = new();
-                Excel.Workbook objWorkBook = objExcel.Workbooks.Open(path); //(openFileDialog1.FileName);
+                Excel.Workbook objWorkBook = objExcel.Workbooks.Open(openFileDialog1.FileName); //(openFileDialog1.FileName); //objExcel.Workbooks.Open(path)
                 Excel.Worksheet objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
 
                 for (int i = 1; i < 52; i++) // определ€ть длину столбца автоматически
@@ -143,13 +146,21 @@ namespace ContSealApp
     public class ContainerFromClientList
     {
         public int ID = 0;
-        public string containerNumber;
-        public string containerWeight;
-        public string containerSeal;
+        public string ContainerNumber;
+        public string ContainerWeight;
+        public string ContainerSeal;
+
+        public void Container(int id, string containerNumber, string containerWeight, string containerSeal)
+        {
+            ID = id;
+            ContainerNumber = containerNumber;
+            ContainerWeight = containerWeight;
+            ContainerSeal = containerSeal;
+        }
     }
     public class ContainerFromFileList : ContainerFromClientList
     {
-        new public string containerNumber;
-        new public string containerSeal;
+        new public string ContainerNumber;
+        new public string ContainerSeal;
     }
 }
