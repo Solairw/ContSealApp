@@ -13,6 +13,9 @@ namespace ContSealApp
 {
     public partial class InputForm1 : Form
     {
+        string[] containersFromFile;
+        string[] sealsFromFile;
+
         public InputForm1()
         {
             InitializeComponent();
@@ -86,12 +89,12 @@ namespace ContSealApp
                     Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
                     Array containersFromFileArray = (System.Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
-                    testBox1.Text += $"{containersFromFile[i]}\n";
+                    //testBox1.Text += $"{containersFromFile[i]}\n";
 
                     Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
                     Array sealsFromFileArray = (System.Array)sealsRange.Value;
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
-                    testBox2.Text += $"{sealsFromFile[i]}\n";
+                    //testBox2.Text += $"{sealsFromFile[i]}\n";
                 }
                 Application.DoEvents();
                 objExcel.Quit();
@@ -132,9 +135,9 @@ namespace ContSealApp
     public class ContainerFromClientList
     {
         public int ID = 0;
-        public string ContainerNumber;
-        public string ContainerWeight;
-        public string ContainerSeal;
+        public string? ContainerNumber;
+        public string? ContainerWeight;
+        public string? ContainerSeal;
 
         public void Container(int id, string containerNumber, string containerWeight, string containerSeal)
         {
@@ -146,7 +149,7 @@ namespace ContSealApp
     }
     public class ContainerFromFileList : ContainerFromClientList
     {
-        new public string ContainerNumber;
-        new public string ContainerSeal;
+        new public string? ContainerNumber;
+        new public string? ContainerSeal;
     }
 }
