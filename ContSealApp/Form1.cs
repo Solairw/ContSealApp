@@ -15,7 +15,6 @@ namespace ContSealApp
     {
         string[] containersFromFile;
         string[] sealsFromFile;
-
         public InputForm1()
         {
             InitializeComponent();
@@ -44,17 +43,23 @@ namespace ContSealApp
             string[] containersList1 = new string[inputList1.Length];
             string[] weightsList = new string[inputList1.Length];
 
+            List<object> containersFromClientList = new();
+
             for (int n = 0; n < inputList1.Length; n++)
             {
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
 
-                ContainerFromClientList containerFromClient = new() { ID = n, ContainerNumber = containersList1[n], ContainerWeight = weightsList[n] };
-                ContainerFromFileList containerFromFile = new() { ID = n, ContainerNumber = inputContainersFromFile[n], ContainerSeal = inputSealsFromFile[n] };
+                ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
+                containersFromClientList.Add(containerFromClientObject);
+                outputBox.Text += $"{containersFromClientList[n]}\r\n";
 
-                IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
+                //ContainersFromFile containerFromFile = new() { ID = n, ContainerNumber = inputContainersFromFile[n], ContainerSeal = inputSealsFromFile[n] };
+
+                //IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
             }
+                        
             //totalContainersBox.Text += containersList1.Length;
         }
         public void IfContainersTheSameAddSealAndShow(int id, string numberFromClient, string numberFromFile, string weight, string seal)
@@ -83,18 +88,18 @@ namespace ContSealApp
                 Excel.Workbook objWorkBook = objExcel.Workbooks.Open(openFileDialog1.FileName);
                 Excel.Worksheet objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
 
-                for (int i = 1; i < 52; i++) // определять длину столбца автоматически
+                for (int i = 1; i < 50; i++) // определять длину столбца автоматически
                 {
 
                     Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
                     Array containersFromFileArray = (System.Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
-                    //testBox1.Text += $"{containersFromFile[i]}\n";
+                    testBox1.Text += $"{containersFromFile[i]}\n";
 
                     Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
                     Array sealsFromFileArray = (System.Array)sealsRange.Value;
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
-                    //testBox2.Text += $"{sealsFromFile[i]}\n";
+                    testBox2.Text += $"{sealsFromFile[i]}\n";
                 }
                 Application.DoEvents();
                 objExcel.Quit();
@@ -132,24 +137,23 @@ namespace ContSealApp
         }
     }
 
-    public class ContainerFromClientList
+    public class ContainerFromClient
     {
-        public int ID = 0;
-        public string? ContainerNumber;
-        public string? ContainerWeight;
-        public string? ContainerSeal;
+        public int ID;
+        public string ContainerNumber;
+        public string ContainerWeight;
+        public string ContainerSeal;
 
-        public void Container(int id, string containerNumber, string containerWeight, string containerSeal)
+        public ContainerFromClient(int id, string containerNumber, string containerWeight)
         {
             ID = id;
             ContainerNumber = containerNumber;
             ContainerWeight = containerWeight;
-            ContainerSeal = containerSeal;
         }
     }
-    public class ContainerFromFileList : ContainerFromClientList
-    {
-        new public string? ContainerNumber;
-        new public string? ContainerSeal;
-    }
+    //public class ContainersFromFile : ContainersFromClient
+    //{
+    //    new public string ContainerNumber;
+    //    new public string ContainerSeal;
+    //}
 }
