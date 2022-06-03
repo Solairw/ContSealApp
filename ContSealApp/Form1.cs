@@ -44,6 +44,7 @@ namespace ContSealApp
             string[] weightsList = new string[inputList1.Length];
 
             List<object> containersFromClientList = new();
+            List<object> containersFromFileList = new();
 
             for (int n = 0; n < inputList1.Length; n++)
             {
@@ -53,9 +54,11 @@ namespace ContSealApp
 
                 ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
                 containersFromClientList.Add(containerFromClientObject);
-                outputBox.Text += $"{containersFromClientList[n]}\r\n";
 
-                //ContainersFromFile containerFromFile = new() { ID = n, ContainerNumber = inputContainersFromFile[n], ContainerSeal = inputSealsFromFile[n] };
+                ContainersFromFile containerFromFileObject = new(n, inputContainersFromFile[n], inputSealsFromFile[n]);
+                containersFromFileList.Add(containerFromFileObject);
+
+                outputBox.Text += $"{containersFromClientList[n]}\r\n";
 
                 //IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
             }
@@ -149,11 +152,20 @@ namespace ContSealApp
             ID = id;
             ContainerNumber = containerNumber;
             ContainerWeight = containerWeight;
+            ContainerSeal = "None";
         }
     }
-    //public class ContainersFromFile : ContainersFromClient
-    //{
-    //    new public string ContainerNumber;
-    //    new public string ContainerSeal;
-    //}
+    public class ContainersFromFile
+    {
+        public int ID;
+        public string ContainerNumber;
+        public string ContainerSeal;
+
+        public ContainersFromFile(int id, string containerNumber, string containerSeal)
+        {
+            ID = id;
+            ContainerNumber = containerNumber;
+            ContainerSeal = containerSeal;
+        }
+    }
 }
