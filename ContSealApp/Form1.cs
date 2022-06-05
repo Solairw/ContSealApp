@@ -34,7 +34,7 @@ namespace ContSealApp
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
-            totalContainersBox.Text += outputBox.Lines.Length;
+            totalContainersBox.Text += outputBox.Lines.Length - 1;
         }
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string[] inputContainersFromFile, string[] inputSealsFromFile)
         {
@@ -44,7 +44,7 @@ namespace ContSealApp
             string[] weightsList = new string[inputList1.Length];
 
             List<ContainerFromClient> containersFromClientList = new();
-            List<ContainersFromFile> containersFromFileList = new();
+            //List<ContainersFromFile> containersFromFileList = new();
 
             for (int n = 0; n < inputList1.Length; n++)
             {
@@ -57,15 +57,10 @@ namespace ContSealApp
                 ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
                 containersFromClientList.Add(containerFromClientObject);
 
-                //ContainersFromFile containerFromFileObject = new(n, inputContainersFromFile[n], inputSealsFromFile[n]); //ошибка!!!
-                //containersFromFileList.Add(containerFromFileObject);
-
                 outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
 
-                //IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
+                IfContainersTheSameAddSealAndShow(ContainerFromClient.ID, ContainerFromClient.ContainerNumber, ContainerFromFile.ContainerNumber, ContainerFromClient.ContainerWeight, ContainerFromFile.ContainerSeal);
             }
-                        
-            //totalContainersBox.Text += containersList1.Length;
         }
         public void IfContainersTheSameAddSealAndShow(int id, string numberFromClient, string numberFromFile, string weight, string seal)
         {
@@ -92,19 +87,23 @@ namespace ContSealApp
                 Excel.Application objExcel = new();
                 Excel.Workbook objWorkBook = objExcel.Workbooks.Open(openFileDialog1.FileName);
                 Excel.Worksheet objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
+                Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
+                Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
 
-                for (int i = 1; i < 50; i++) // определять длину столбца автоматически
+                List<ContainerFromFile> containersFromFileList = new();
+
+                for (int i = 0; i < 50; i++) // определять длину столбца автоматически
                 {
-
-                    Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
-                    Array containersFromFileArray = (System.Array)containersRange.Value;
-                    string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    Array containersFromFileArray = (Array)containersRange.Value;
+                    string[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox1.Text += $"{containersFromFile[i]}\n";
 
-                    Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
-                    Array sealsFromFileArray = (System.Array)sealsRange.Value;
-                    string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    Array sealsFromFileArray = (Array)sealsRange.Value;
+                    string[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox2.Text += $"{sealsFromFile[i]}\n";
+
+                    ContainerFromFile containerFromFileObject = new(i, containersFromFile[i], sealsFromFile[i]);
+                    containersFromFileList.Add(containerFromFileObject);
                 }
                 Application.DoEvents();
                 objExcel.Quit();
@@ -157,16 +156,18 @@ namespace ContSealApp
             ContainerSeal = "None";
         }
     }
-    public class ContainersFromFile
+    public class ContainerFromFile
     {
         public int ID;
         public string ContainerNumber;
+        public string ContainerWeight;
         public string ContainerSeal;
 
-        public ContainersFromFile(int id, string containerNumber, string containerSeal)
+        public ContainerFromFile(int id, string containerNumber, string containerSeal)
         {
             ID = id;
             ContainerNumber = containerNumber;
+            ContainerWeight = "None";
             ContainerSeal = containerSeal;
         }
     }

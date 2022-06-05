@@ -72,7 +72,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 28);
+            this.label1.Size = new System.Drawing.Size(55, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "Input1";
             // 
@@ -80,7 +80,7 @@
             // 
             this.weightMultiplierValueBox.Location = new System.Drawing.Point(236, 178);
             this.weightMultiplierValueBox.Name = "weightMultiplierValueBox";
-            this.weightMultiplierValueBox.Size = new System.Drawing.Size(106, 34);
+            this.weightMultiplierValueBox.Size = new System.Drawing.Size(106, 29);
             this.weightMultiplierValueBox.TabIndex = 11;
             this.weightMultiplierValueBox.Text = "1000";
             // 
@@ -90,7 +90,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(236, 158);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 23);
+            this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Weight Multiplier";
             // 
@@ -101,16 +101,16 @@
             this.outputBox.Multiline = true;
             this.outputBox.Name = "outputBox";
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputBox.Size = new System.Drawing.Size(301, 423);
+            this.outputBox.Size = new System.Drawing.Size(361, 423);
             this.outputBox.TabIndex = 13;
             this.outputBox.WordWrap = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(632, 30);
+            this.label5.Location = new System.Drawing.Point(586, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(196, 28);
+            this.label5.Size = new System.Drawing.Size(156, 21);
             this.label5.TabIndex = 14;
             this.label5.Text = "Cntr + Weight + Seal";
             // 
@@ -131,7 +131,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(350, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 28);
+            this.label7.Size = new System.Drawing.Size(55, 21);
             this.label7.TabIndex = 19;
             this.label7.Text = "Input2";
             // 
@@ -139,7 +139,7 @@
             // 
             this.totalContainersBox.Location = new System.Drawing.Point(1158, 533);
             this.totalContainersBox.Name = "totalContainersBox";
-            this.totalContainersBox.Size = new System.Drawing.Size(84, 34);
+            this.totalContainersBox.Size = new System.Drawing.Size(84, 29);
             this.totalContainersBox.TabIndex = 20;
             // 
             // label3
@@ -147,7 +147,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1108, 536);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 28);
+            this.label3.Size = new System.Drawing.Size(42, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Total";
             // 
@@ -163,7 +163,7 @@
             // 
             // testBox1
             // 
-            this.testBox1.Location = new System.Drawing.Point(915, 67);
+            this.testBox1.Location = new System.Drawing.Point(1090, 58);
             this.testBox1.Multiline = true;
             this.testBox1.Name = "testBox1";
             this.testBox1.Size = new System.Drawing.Size(149, 423);
@@ -171,7 +171,7 @@
             // 
             // testBox2
             // 
-            this.testBox2.Location = new System.Drawing.Point(1093, 67);
+            this.testBox2.Location = new System.Drawing.Point(1245, 58);
             this.testBox2.Multiline = true;
             this.testBox2.Name = "testBox2";
             this.testBox2.Size = new System.Drawing.Size(149, 423);
@@ -184,10 +184,10 @@
             // InputForm1
             // 
             this.AcceptButton = this.startButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1275, 591);
+            this.ClientSize = new System.Drawing.Size(1422, 591);
             this.Controls.Add(this.testBox2);
             this.Controls.Add(this.testBox1);
             this.Controls.Add(this.writeToExcel);
