@@ -43,23 +43,20 @@ namespace ContSealApp
             string[] containersList1 = new string[inputList1.Length];
             string[] weightsList = new string[inputList1.Length];
 
+            int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
+
             List<ContainerFromClient> containersFromClientList = new();
-            //List<ContainersFromFile> containersFromFileList = new();
 
-            for (int n = 0; n < inputList1.Length; n++) //в цикле сразу делается сравнение со вторым классом и при совпадении сразу заносится пломба
+            for (int n = 0; n < inputList1.Length; n++) //сперва сравнение сравнение номера в массиве и при совпадении - добавление пломбы и запись объекта. Или сравнение двух классов, с добавление пломбы к созданному уже объету после???
             {
-                int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
-
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
 
                 ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
-                containersFromClientList.Add(containerFromClientObject);
 
                 outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
-
-                IfContainersTheSameAddSealAndShow(ContainerFromClient.ID, ContainerFromClient.ContainerNumber, ContainerFromFile.ContainerNumber, ContainerFromClient.ContainerWeight, ContainerFromFile.ContainerSeal);
+                //IfContainersTheSameAddSealAndShow(ContainerFromClient.ID, ContainerFromClient.ContainerNumber, ContainerFromFile.ContainerNumber, ContainerFromClient.ContainerWeight, ContainerFromFile.ContainerSeal);
             }
         }
         public void IfContainersTheSameAddSealAndShow(int id, string numberFromClient, string numberFromFile, string weight, string seal)
@@ -95,11 +92,11 @@ namespace ContSealApp
                 for (int i = 0; i < 50; i++) // определять длину столбца автоматически
                 {
                     Array containersFromFileArray = (Array)containersRange.Value;
-                    string[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox1.Text += $"{containersFromFile[i]}\n";
 
                     Array sealsFromFileArray = (Array)sealsRange.Value;
-                    string[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox2.Text += $"{sealsFromFile[i]}\n";
 
                     ContainerFromFile containerFromFileObject = new(i, containersFromFile[i], sealsFromFile[i]);
