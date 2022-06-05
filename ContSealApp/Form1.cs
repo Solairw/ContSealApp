@@ -46,7 +46,7 @@ namespace ContSealApp
             List<ContainerFromClient> containersFromClientList = new();
             //List<ContainersFromFile> containersFromFileList = new();
 
-            for (int n = 0; n < inputList1.Length; n++)
+            for (int n = 0; n < inputList1.Length; n++) //в цикле сразу делается сравнение со вторым классом и при совпадении сразу заносится пломба
             {
                 int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
 
