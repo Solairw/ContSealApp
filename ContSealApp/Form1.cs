@@ -34,7 +34,7 @@ namespace ContSealApp
             {
                 MessageBox.Show("Ошибка - " + ex.Message);
             }
-            totalContainersBox.Text += outputBox.Lines.Count();
+            totalContainersBox.Text += outputBox.Lines.Length;
         }
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string[] inputContainersFromFile, string[] inputSealsFromFile)
         {
@@ -43,11 +43,13 @@ namespace ContSealApp
             string[] containersList1 = new string[inputList1.Length];
             string[] weightsList = new string[inputList1.Length];
 
-            List<object> containersFromClientList = new();
-            List<object> containersFromFileList = new();
+            List<ContainerFromClient> containersFromClientList = new();
+            List<ContainersFromFile> containersFromFileList = new();
 
             for (int n = 0; n < inputList1.Length; n++)
             {
+                int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
+
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
@@ -55,10 +57,10 @@ namespace ContSealApp
                 ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
                 containersFromClientList.Add(containerFromClientObject);
 
-                ContainersFromFile containerFromFileObject = new(n, inputContainersFromFile[n], inputSealsFromFile[n]);
-                containersFromFileList.Add(containerFromFileObject);
+                //ContainersFromFile containerFromFileObject = new(n, inputContainersFromFile[n], inputSealsFromFile[n]); //ошибка!!!
+                //containersFromFileList.Add(containerFromFileObject);
 
-                outputBox.Text += $"{containersFromClientList[n]}\r\n";
+                outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
 
                 //IfContainersTheSameAddSealAndShow(containerFromClient.ID, containerFromClient.ContainerNumber, containerFromFile.ContainerNumber, containerFromClient.ContainerWeight, containerFromFile.ContainerSeal);
             }
