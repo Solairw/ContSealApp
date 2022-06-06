@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "D:\\Users\\Si02\\.nuget\\packages\\": {},
+    "C:\\Users\\elena\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Si02\\Desktop\\Si02Vl\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+      "projectUniqueName": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
       "projectName": "ContSealApp",
-      "projectPath": "D:\\Users\\Si02\\Desktop\\Si02Vl\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
-      "packagesPath": "D:\\Users\\Si02\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\Si02\\Desktop\\Si02Vl\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
+      "projectPath": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+      "packagesPath": "C:\\Users\\elena\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\elena\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "D:\\Users\\Si02\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\elena\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

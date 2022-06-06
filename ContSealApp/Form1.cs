@@ -53,24 +53,16 @@ namespace ContSealApp
                 containersList1[n] = temp1[0];
                 weightsList[n] = temp1[1];
 
-                ContainerFromClient containerFromClientObject = new(n, containersList1[n], weightsList[n]);
+                ContainerFromClient containerFromClient = new(n, containersList1[n], weightsList[n]);
+                containersFromClientList.Add(containerFromClient);
 
-                outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
+                //outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
                 //IfContainersTheSameAddSealAndShow(ContainerFromClient.ID, ContainerFromClient.ContainerNumber, ContainerFromFile.ContainerNumber, ContainerFromClient.ContainerWeight, ContainerFromFile.ContainerSeal);
             }
         }
-        public void IfContainersTheSameAddSealAndShow(int id, string numberFromClient, string numberFromFile, string weight, string seal)
+        public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weight, string seal)
         {
-            int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
-            if (numberFromClient == numberFromFile)
-            {
-                numberFromClient = numberFromFile;
-                outputBox.Text += $"{id} - {numberFromClient}, {Convert.ToDouble(weight) * weightMultiplier} , {seal}\r\n";
-            }
-            else if (numberFromClient != numberFromFile)
-            {
-                outputBox.Text += $"{id} - {numberFromClient} - совпадений не найдено!\r\n";
-            }
+            //var result = listOfClass2objects.Where(x => x.Name == class1.Name).ToList();
         }
         public void ReadFromExcel()
         {
@@ -99,8 +91,8 @@ namespace ContSealApp
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox2.Text += $"{sealsFromFile[i]}\n";
 
-                    ContainerFromFile containerFromFileObject = new(i, containersFromFile[i], sealsFromFile[i]);
-                    containersFromFileList.Add(containerFromFileObject);
+                    ContainerFromFile containerFromFile = new(i, containersFromFile[i], sealsFromFile[i]);
+                    containersFromFileList.Add(containerFromFile);
                 }
                 Application.DoEvents();
                 objExcel.Quit();
@@ -137,7 +129,6 @@ namespace ContSealApp
             MessageBox.Show("Done!");
         }
     }
-
     public class ContainerFromClient
     {
         public int ID;
