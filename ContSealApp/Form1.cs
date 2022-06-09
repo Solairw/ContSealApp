@@ -132,25 +132,45 @@ namespace ContSealApp
 
         private async void WriteToDB_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=.\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
-            SqlConnection connection = new SqlConnection(connectionString);
-            try
+            string connectionString = "Server=.\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionStringToDB = "Server=.\\SQLEXPRESS;Database=CONTAINERS_DATABASE;Trusted_Connection=True;TrustServerCertificate=True;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                dbStatusBox.Text += "Connection is OPEN";
+                dbStatusBox.Text += "Connection is open";
+                dbStatusBox.Text += $"\r\nСтрока подключения: {connection.ConnectionString} " +
+                    $"\r\nБаза данных: {connection.Database}" +
+                    $"\r\nСервер: {connection.DataSource}" +
+                    $"\r\nВерсия сервера: {connection.ServerVersion}" +
+                    $"\r\nСостояние: {connection.State}" +
+                    $"\r\nWork Station Id: {connection.WorkstationId}";
             }
-            catch (SqlException ex)
+
+            using (SqlConnection connection = new SqlConnection(connectionStringToDB))
             {
-                dbStatusBox.Text += ex.Message;
+                await connection.OpenAsync();
+
+                //SqlCommand createDB = new SqlCommand();
+                //createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
+                //createDB.Connection = connection;
+                //await createDB.ExecuteNonQueryAsync();
+                //dbStatusBox.Text += $"\r\nБаза данных создана";
+
+                //SqlCommand createTable = new SqlCommand();
+                //createTable.CommandText = "CREATE TABLE Containers_From_File (Id INT PRIMARY KEY IDENTITY, Number NVARCHAR(11), Seal NVARCHAR(15), Weight INT)";
+                //createTable.Connection = connection;
+                //await createTable.ExecuteNonQueryAsync();
+                //dbStatusBox.Text += $"\r\nТаблица данных создана";
+
+                SqlCommand createContainer = new SqlCommand();
+                createContainer.CommandText = "INSERT INTO Containers_From_File (Number, Seal, Weight) VALUES ('FESU5368273', 'S278177', 24000)";
+                createContainer.Connection = connection;
+                await createContainer.ExecuteNonQueryAsync();
+                dbStatusBox.Text += $"\r\nКонтейнер добавлен";
             }
-            finally
-            {
-                if(connection.State == ConnectionState.Open)
-                {
-                    await connection.CloseAsync();
-                    dbStatusBox.Text += "Connection CLOSED";
-                }
-            }
+            dbStatusBox.Text += $"\r\nConnection is closed";
+            dbStatusBox.Text += $"\r\nProgram is closed";
         }
     }
     public class ContainerFromClient

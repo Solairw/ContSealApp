@@ -103,7 +103,7 @@
             this.outputBox.Multiline = true;
             this.outputBox.Name = "outputBox";
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputBox.Size = new System.Drawing.Size(361, 295);
+            this.outputBox.Size = new System.Drawing.Size(361, 211);
             this.outputBox.TabIndex = 13;
             this.outputBox.WordWrap = false;
             // 
@@ -168,7 +168,7 @@
             this.testBox1.Location = new System.Drawing.Point(1090, 58);
             this.testBox1.Multiline = true;
             this.testBox1.Name = "testBox1";
-            this.testBox1.Size = new System.Drawing.Size(149, 304);
+            this.testBox1.Size = new System.Drawing.Size(149, 220);
             this.testBox1.TabIndex = 23;
             // 
             // testBox2
@@ -176,7 +176,7 @@
             this.testBox2.Location = new System.Drawing.Point(1245, 58);
             this.testBox2.Multiline = true;
             this.testBox2.Name = "testBox2";
-            this.testBox2.Size = new System.Drawing.Size(149, 304);
+            this.testBox2.Size = new System.Drawing.Size(149, 220);
             this.testBox2.TabIndex = 24;
             // 
             // openFileDialog1
@@ -195,10 +195,11 @@
             // 
             // dbStatusBox
             // 
-            this.dbStatusBox.Location = new System.Drawing.Point(586, 369);
+            this.dbStatusBox.Location = new System.Drawing.Point(586, 284);
             this.dbStatusBox.Multiline = true;
             this.dbStatusBox.Name = "dbStatusBox";
-            this.dbStatusBox.Size = new System.Drawing.Size(808, 158);
+            this.dbStatusBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.dbStatusBox.Size = new System.Drawing.Size(808, 243);
             this.dbStatusBox.TabIndex = 26;
             // 
             // InputForm1
