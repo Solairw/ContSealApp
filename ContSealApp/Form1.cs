@@ -147,10 +147,10 @@ namespace ContSealApp
                     $"\r\nWork Station Id: {connection.WorkstationId}";
             }
 
-            using (SqlConnection connection = new SqlConnection(connectionStringToDB))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                try 
+                try
                 {
                     SqlCommand createDB = new SqlCommand();
                     createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
@@ -158,11 +158,26 @@ namespace ContSealApp
                     await createDB.ExecuteNonQueryAsync();
                     dbStatusBox.Text += $"\r\nБаза данных создана";
                 }
-                catch(SqlException ex)
+                catch (SqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-
+            }
+            using (SqlConnection connection = new SqlConnection(connectionStringToDB))
+            {
+                await connection.OpenAsync();
+                try
+                {
+                    SqlCommand createTable = new SqlCommand();
+                    createTable.CommandText = "CREATE TABLE Containers_From_File (Id INT IDENTITY, Number NVARCHAR(11), Weight INT, Seal NVARCHAR(10))";
+                    createTable.Connection = connection;
+                    await createTable.ExecuteNonQueryAsync();
+                    dbStatusBox.Text += $"\r\nТаблица добавлена";
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 try
                 {
                     SqlCommand createContainer = new SqlCommand();
