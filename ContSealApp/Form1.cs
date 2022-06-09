@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Data.SqlClient;
 
 namespace ContSealApp
 {
@@ -127,6 +128,29 @@ namespace ContSealApp
 
             excelApp.Quit();
             MessageBox.Show("Done!");
+        }
+
+        private async void WriteToDB_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=.\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                await connection.OpenAsync();
+                outputBox.Text += "Connection is OPEN";
+            }
+            catch (SqlException ex)
+            {
+                outputBox.Text += ex.Message;
+            }
+            finally
+            {
+                if(connection.State == ConnectionState.Open)
+                {
+                    await connection.CloseAsync();
+                    outputBox.Text += "Connection CLOSED";
+                }
+            }
         }
     }
     public class ContainerFromClient
