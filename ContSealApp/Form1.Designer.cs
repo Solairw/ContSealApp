@@ -44,6 +44,7 @@
             this.testBox2 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.WriteToDB = new System.Windows.Forms.Button();
+            this.dbStatusBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // inputBox
@@ -54,7 +55,7 @@
             this.inputBox.Multiline = true;
             this.inputBox.Name = "inputBox";
             this.inputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.inputBox.Size = new System.Drawing.Size(215, 423);
+            this.inputBox.Size = new System.Drawing.Size(215, 467);
             this.inputBox.TabIndex = 1;
             this.inputBox.Text = "CLHU3902470 22.4\r\nTCLU3172470 22.34\r\nFESU2114840 22.35\r\nFICU3552444 20.55";
             // 
@@ -102,7 +103,7 @@
             this.outputBox.Multiline = true;
             this.outputBox.Name = "outputBox";
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputBox.Size = new System.Drawing.Size(361, 423);
+            this.outputBox.Size = new System.Drawing.Size(361, 295);
             this.outputBox.TabIndex = 13;
             this.outputBox.WordWrap = false;
             // 
@@ -123,7 +124,7 @@
             this.inputBox2.Multiline = true;
             this.inputBox2.Name = "inputBox2";
             this.inputBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.inputBox2.Size = new System.Drawing.Size(228, 423);
+            this.inputBox2.Size = new System.Drawing.Size(228, 459);
             this.inputBox2.TabIndex = 18;
             this.inputBox2.Text = "CLHU3902470 S25656\r\nTCLU3172470 N54545\r\nFESU2094893 M45545\r\nFICU3552444 S66566f";
             // 
@@ -167,7 +168,7 @@
             this.testBox1.Location = new System.Drawing.Point(1090, 58);
             this.testBox1.Multiline = true;
             this.testBox1.Name = "testBox1";
-            this.testBox1.Size = new System.Drawing.Size(149, 423);
+            this.testBox1.Size = new System.Drawing.Size(149, 304);
             this.testBox1.TabIndex = 23;
             // 
             // testBox2
@@ -175,7 +176,7 @@
             this.testBox2.Location = new System.Drawing.Point(1245, 58);
             this.testBox2.Multiline = true;
             this.testBox2.Name = "testBox2";
-            this.testBox2.Size = new System.Drawing.Size(149, 423);
+            this.testBox2.Size = new System.Drawing.Size(149, 304);
             this.testBox2.TabIndex = 24;
             // 
             // openFileDialog1
@@ -192,6 +193,14 @@
             this.WriteToDB.UseVisualStyleBackColor = true;
             this.WriteToDB.Click += new System.EventHandler(this.WriteToDB_Click);
             // 
+            // dbStatusBox
+            // 
+            this.dbStatusBox.Location = new System.Drawing.Point(586, 369);
+            this.dbStatusBox.Multiline = true;
+            this.dbStatusBox.Name = "dbStatusBox";
+            this.dbStatusBox.Size = new System.Drawing.Size(808, 158);
+            this.dbStatusBox.TabIndex = 26;
+            // 
             // InputForm1
             // 
             this.AcceptButton = this.startButton;
@@ -199,6 +208,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1422, 591);
+            this.Controls.Add(this.dbStatusBox);
             this.Controls.Add(this.WriteToDB);
             this.Controls.Add(this.testBox2);
             this.Controls.Add(this.testBox1);
@@ -242,5 +252,6 @@
         private OpenFileDialog openFileDialog1;
         public TextBox outputBox;
         private Button WriteToDB;
+        private TextBox dbStatusBox;
     }
 }
