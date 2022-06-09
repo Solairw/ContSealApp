@@ -150,24 +150,31 @@ namespace ContSealApp
             using (SqlConnection connection = new SqlConnection(connectionStringToDB))
             {
                 await connection.OpenAsync();
+                try 
+                {
+                    SqlCommand createDB = new SqlCommand();
+                    createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
+                    createDB.Connection = connection;
+                    await createDB.ExecuteNonQueryAsync();
+                    dbStatusBox.Text += $"\r\nБаза данных создана";
+                }
+                catch(SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
-                //SqlCommand createDB = new SqlCommand();
-                //createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
-                //createDB.Connection = connection;
-                //await createDB.ExecuteNonQueryAsync();
-                //dbStatusBox.Text += $"\r\nБаза данных создана";
-
-                //SqlCommand createTable = new SqlCommand();
-                //createTable.CommandText = "CREATE TABLE Containers_From_File (Id INT PRIMARY KEY IDENTITY, Number NVARCHAR(11), Seal NVARCHAR(15), Weight INT)";
-                //createTable.Connection = connection;
-                //await createTable.ExecuteNonQueryAsync();
-                //dbStatusBox.Text += $"\r\nТаблица данных создана";
-
-                SqlCommand createContainer = new SqlCommand();
-                createContainer.CommandText = "INSERT INTO Containers_From_File (Number, Seal, Weight) VALUES ('FESU5368273', 'S278177', 24000)";
-                createContainer.Connection = connection;
-                await createContainer.ExecuteNonQueryAsync();
-                dbStatusBox.Text += $"\r\nКонтейнер добавлен";
+                try
+                {
+                    SqlCommand createContainer = new SqlCommand();
+                    createContainer.CommandText = "INSERT INTO Containers_From_File (Number, Seal, Weight) VALUES ('FESU5368273', 'S278177', 24000)";
+                    createContainer.Connection = connection;
+                    await createContainer.ExecuteNonQueryAsync();
+                    dbStatusBox.Text += $"\r\nКонтейнер добавлен";
+                }
+                catch(SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             dbStatusBox.Text += $"\r\nConnection is closed";
             dbStatusBox.Text += $"\r\nProgram is closed";
