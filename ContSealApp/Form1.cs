@@ -31,7 +31,7 @@ namespace ContSealApp
             {
                 ReadFromExcel();
                 InputTextToContainersWeightsAndSeals(inputBox.Text, containersFromFile, sealsFromFile);
-                ContainersComparison();
+                //ContainersComparison();
             }
             catch (FormatException ex)
             {
@@ -220,19 +220,4 @@ namespace ContSealApp
             ContainerSeal = containerSeal;
         }
     }
-    //public class ResultContainersInfoList
-    //{
-    //    public int ID;
-    //    public string ResultContainerNumber;
-    //    public string ResultContainerWeight;
-    //    public string ResultContainerSeal;
-
-    //    public ResultContainersInfoList(int id, string resultContainerNumber, string resultContainerWeight, string resultContainerSeal)
-    //    {
-    //        ID = id;
-    //        ResultContainerNumber = resultContainerNumber;
-    //        ResultContainerWeight = resultContainerWeight;
-    //        ResultContainerSeal = resultContainerSeal;
-    //    }
-    //}
 }
