@@ -25,10 +25,11 @@ namespace ContSealApp
         {
             outputBox.Clear();
             totalContainersBox.Clear();
-            ReadFromExcel();
+            testBox1.Clear();
 
             try
             {
+                ReadFromExcel();
                 InputTextToContainersWeightsAndSeals(inputBox.Text, containersFromFile, sealsFromFile);
             }
             catch (FormatException ex)
@@ -46,9 +47,9 @@ namespace ContSealApp
 
             int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
 
-            List<ContainerFromClient> containersFromClientList = new();
+            List<ContainerFromClient> containersFromClientList = new();//добавляем экземпляр в класс
 
-            for (int n = 0; n < inputList1.Length; n++) //сперва сравнение сравнение номера в массиве и при совпадении - добавление пломбы и запись объекта. Или сравнение двух классов, с добавление пломбы к созданному уже объету после???
+            for (int n = 0; n < inputList1.Length; n++)
             {
                 string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
                 containersList1[n] = temp1[0];
@@ -56,20 +57,14 @@ namespace ContSealApp
 
                 ContainerFromClient containerFromClient = new(n, containersList1[n], weightsList[n]);
                 containersFromClientList.Add(containerFromClient);
-
-                //outputBox.Text += $"{containersFromClientList[n].ContainerNumber} - {Convert.ToDouble(containersFromClientList[n].ContainerWeight) * weightMultiplier}\r\n";
-                //IfContainersTheSameAddSealAndShow(ContainerFromClient.ID, ContainerFromClient.ContainerNumber, ContainerFromFile.ContainerNumber, ContainerFromClient.ContainerWeight, ContainerFromFile.ContainerSeal);
             }
         }
-        public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weight, string seal)
+        public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weightFromClient, string sealFromFile)
         {
-            //var result = listOfClass2objects.Where(x => x.Name == class1.Name).ToList();
+            
         }
         public void ReadFromExcel()
         {
-            //Очищаем от старого текста окно вывода.
-            testBox1.Clear();
-
             //Открываем файл Экселя
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -129,70 +124,69 @@ namespace ContSealApp
             excelApp.Quit();
             MessageBox.Show("Done!");
         }
-
         private async void WriteToDB_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=.\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True;";
-            string connectionStringToDB = "Server=.\\SQLEXPRESS;Database=CONTAINERS_DATABASE;Trusted_Connection=True;TrustServerCertificate=True;";
+        //    string connectionString = "Server=.\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True;";
+        //    string connectionStringToDB = "Server=.\\SQLEXPRESS;Database=CONTAINERS_DATABASE;Trusted_Connection=True;TrustServerCertificate=True;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
-                dbStatusBox.Text += "Connection is open";
-                dbStatusBox.Text += $"\r\nСтрока подключения: {connection.ConnectionString} " +
-                    $"\r\nБаза данных: {connection.Database}" +
-                    $"\r\nСервер: {connection.DataSource}" +
-                    $"\r\nВерсия сервера: {connection.ServerVersion}" +
-                    $"\r\nСостояние: {connection.State}" +
-                    $"\r\nWork Station Id: {connection.WorkstationId}";
-            }
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        dbStatusBox.Text += "Connection is open";
+        //        dbStatusBox.Text += $"\r\nСтрока подключения: {connection.ConnectionString} " +
+        //            $"\r\nБаза данных: {connection.Database}" +
+        //            $"\r\nСервер: {connection.DataSource}" +
+        //            $"\r\nВерсия сервера: {connection.ServerVersion}" +
+        //            $"\r\nСостояние: {connection.State}" +
+        //            $"\r\nWork Station Id: {connection.WorkstationId}";
+        //    }
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
-                try
-                {
-                    SqlCommand createDB = new SqlCommand();
-                    createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
-                    createDB.Connection = connection;
-                    await createDB.ExecuteNonQueryAsync();
-                    dbStatusBox.Text += $"\r\nБаза данных создана";
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            using (SqlConnection connection = new SqlConnection(connectionStringToDB))
-            {
-                await connection.OpenAsync();
-                try
-                {
-                    SqlCommand createTable = new SqlCommand();
-                    createTable.CommandText = "CREATE TABLE Containers_From_File (Id INT IDENTITY, Number NVARCHAR(11), Weight INT, Seal NVARCHAR(10))";
-                    createTable.Connection = connection;
-                    await createTable.ExecuteNonQueryAsync();
-                    dbStatusBox.Text += $"\r\nТаблица добавлена";
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                try
-                {
-                    SqlCommand createContainer = new SqlCommand();
-                    createContainer.CommandText = "INSERT INTO Containers_From_File (Number, Seal, Weight) VALUES ('FESU5368273', 'S278177', 24000)";
-                    createContainer.Connection = connection;
-                    await createContainer.ExecuteNonQueryAsync();
-                    dbStatusBox.Text += $"\r\nКонтейнер добавлен";
-                }
-                catch(SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            dbStatusBox.Text += $"\r\nConnection is closed";
-            dbStatusBox.Text += $"\r\nProgram is closed";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        await connection.OpenAsync();
+        //        try
+        //        {
+        //            SqlCommand createDB = new SqlCommand();
+        //            createDB.CommandText = "CREATE DATABASE CONTAINERS_DATABASE";
+        //            createDB.Connection = connection;
+        //            await createDB.ExecuteNonQueryAsync();
+        //            dbStatusBox.Text += $"\r\nБаза данных создана";
+        //        }
+        //        catch (SqlException ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    using (SqlConnection connection = new SqlConnection(connectionStringToDB))
+        //    {
+        //        await connection.OpenAsync();
+        //        try
+        //        {
+        //            SqlCommand createTable = new SqlCommand();
+        //            createTable.CommandText = "CREATE TABLE Containers_From_File (Id INT IDENTITY, Number NVARCHAR(11), Weight INT, Seal NVARCHAR(10))";
+        //            createTable.Connection = connection;
+        //            await createTable.ExecuteNonQueryAsync();
+        //            dbStatusBox.Text += $"\r\nТаблица добавлена";
+        //        }
+        //        catch (SqlException ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //        try
+        //        {
+        //            SqlCommand createContainer = new SqlCommand();
+        //            createContainer.CommandText = "INSERT INTO Containers_From_File (Number, Seal, Weight) VALUES (, '', )";
+        //            createContainer.Connection = connection;
+        //            await createContainer.ExecuteNonQueryAsync();
+        //            dbStatusBox.Text += $"\r\nКонтейнера добавлен";
+        //        }
+        //        catch(SqlException ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    dbStatusBox.Text += $"\r\nConnection is closed";
+        //    dbStatusBox.Text += $"\r\nProgram is closed";
         }
     }
     public class ContainerFromClient
@@ -223,6 +217,21 @@ namespace ContSealApp
             ContainerNumber = containerNumber;
             ContainerWeight = "None";
             ContainerSeal = containerSeal;
+        }
+    }
+    public class ResultContainersInfoList
+    {
+        public int ID;
+        public string ResultContainerNumber;
+        public string ResultContainerWeight;
+        public string ResultContainerSeal;
+
+        public ResultContainersInfoList(int id, string resultContainerNumber, string resultContainerWeight, string resultContainerSeal)
+        {
+            ID = id;
+            ResultContainerNumber = resultContainerNumber;
+            ResultContainerWeight = resultContainerWeight;
+            ResultContainerSeal = resultContainerSeal;
         }
     }
 }
