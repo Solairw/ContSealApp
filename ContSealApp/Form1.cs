@@ -59,9 +59,21 @@ namespace ContSealApp
                 ContainerFromClient containerFromClient = new(n, inputContainersList[n], inputWeightsList[n]);
                 containersFromClientList.Add(containerFromClient);
             }
+            
             object firstContainerInListNumber = containersFromClientList[0].ContainerNumber;
             object secondContainerInListWeight = containersFromClientList[1].ContainerWeight;
-            outputBox.Text += $"{firstContainerInListNumber} - {secondContainerInListWeight}";
+            object firstContainerInListWeight = containersFromClientList[0].ContainerWeight;
+            
+            outputBox.Text += $"{firstContainerInListNumber} - {secondContainerInListWeight}\r\n";
+            
+            if(secondContainerInListWeight != firstContainerInListWeight)
+            {
+                outputBox.Text += "True";
+            }
+            else
+            {
+                outputBox.Text += "False";
+            }
         }
         public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weightFromClient, string sealFromFile)
         {
