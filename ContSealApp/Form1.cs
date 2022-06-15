@@ -31,6 +31,7 @@ namespace ContSealApp
             {
                 ReadFromExcel();
                 InputTextToContainersWeightsAndSeals(inputBox.Text, containersFromFile, sealsFromFile);
+                ContainersComparison();
             }
             catch (FormatException ex)
             {
@@ -41,27 +42,27 @@ namespace ContSealApp
         public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string[] inputContainersFromFile, string[] inputSealsFromFile)
         {
             inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
-            string[] inputList1 = inputTextFromClient.Split('\n');
-            string[] containersList1 = new string[inputList1.Length];
-            string[] weightsList = new string[inputList1.Length];
+            string[] inputList = inputTextFromClient.Split('\n');
+            string[] inputContainersList = new string[inputList.Length];
+            string[] inputWeightsList = new string[inputList.Length];
 
             int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
 
-            List<ContainerFromClient> containersFromClientList = new();//добавл€ем экземпл€р в класс
+            List<ContainerFromClient> containersFromClientList = new();//добавл€ем экземпл€р класса
 
-            for (int n = 0; n < inputList1.Length; n++)
+            for (int n = 0; n < inputList.Length; n++)
             {
-                string[] temp1 = inputList1[n].Split(new char[] { ' ', '\t' });
-                containersList1[n] = temp1[0];
-                weightsList[n] = temp1[1];
+                string[] temp1 = inputList[n].Split(new char[] { ' ', '\t' });
+                inputContainersList[n] = temp1[0];
+                inputWeightsList[n] = temp1[1];
 
-                ContainerFromClient containerFromClient = new(n, containersList1[n], weightsList[n]);
+                ContainerFromClient containerFromClient = new(n, inputContainersList[n], inputWeightsList[n]);
                 containersFromClientList.Add(containerFromClient);
             }
         }
         public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weightFromClient, string sealFromFile)
         {
-            
+
         }
         public void ReadFromExcel()
         {
@@ -219,19 +220,19 @@ namespace ContSealApp
             ContainerSeal = containerSeal;
         }
     }
-    public class ResultContainersInfoList
-    {
-        public int ID;
-        public string ResultContainerNumber;
-        public string ResultContainerWeight;
-        public string ResultContainerSeal;
+    //public class ResultContainersInfoList
+    //{
+    //    public int ID;
+    //    public string ResultContainerNumber;
+    //    public string ResultContainerWeight;
+    //    public string ResultContainerSeal;
 
-        public ResultContainersInfoList(int id, string resultContainerNumber, string resultContainerWeight, string resultContainerSeal)
-        {
-            ID = id;
-            ResultContainerNumber = resultContainerNumber;
-            ResultContainerWeight = resultContainerWeight;
-            ResultContainerSeal = resultContainerSeal;
-        }
-    }
+    //    public ResultContainersInfoList(int id, string resultContainerNumber, string resultContainerWeight, string resultContainerSeal)
+    //    {
+    //        ID = id;
+    //        ResultContainerNumber = resultContainerNumber;
+    //        ResultContainerWeight = resultContainerWeight;
+    //        ResultContainerSeal = resultContainerSeal;
+    //    }
+    //}
 }
