@@ -16,6 +16,7 @@ namespace ContSealApp
     {
         string[] containersFromFile;
         string[] sealsFromFile;
+
         public InputForm1()
         {
             InitializeComponent();
@@ -74,6 +75,9 @@ namespace ContSealApp
             {
                 outputBox.Text += "False";
             }
+
+            var testVar = containersFromClientList.Where(p => p.ContainerNumber.Length > 11);
+            var result = containersFromClientList.Union(containersFromFileList);
         }
         public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weightFromClient, string sealFromFile)
         {
