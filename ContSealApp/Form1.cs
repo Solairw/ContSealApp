@@ -30,9 +30,7 @@ namespace ContSealApp
 
             try
             {
-                ReadFromExcel();
-                InputTextToContainersWeightsAndSeals(inputBox.Text, containersFromFile, sealsFromFile);
-                //ContainersComparison();
+                InputTextSplitToContainerNumbersAndWeights(inputBox.Text);
             }
             catch (FormatException ex)
             {
@@ -40,7 +38,7 @@ namespace ContSealApp
             }
             totalContainersBox.Text += outputBox.Lines.Length - 1;
         }
-        public void InputTextToContainersWeightsAndSeals(string inputTextFromClient, string[] inputContainersFromFile, string[] inputSealsFromFile)
+        public void InputTextSplitToContainerNumbersAndWeights(string inputTextFromClient)
         {
             inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             string[] inputList = inputTextFromClient.Split('\n');
@@ -77,14 +75,14 @@ namespace ContSealApp
             }
 
             var testVar = containersFromClientList.Where(p => p.ContainerNumber.Length > 11);
-            var result = containersFromClientList.Union(containersFromFileList);
+            
+            var a = ReadFromExcel();
+            outputBox.Text += a;
         }
-        public void ContainersComparison(int id, string numberFromClient, string numberFromFile, string weightFromClient, string sealFromFile)
+        public object ReadFromExcel()
         {
+            List<ContainerFromFile> containersFromFileList = new();
 
-        }
-        public void ReadFromExcel()
-        {
             //ќткрываем файл Ёксел€
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -95,9 +93,7 @@ namespace ContSealApp
                 Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
                 Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
 
-                List<ContainerFromFile> containersFromFileList = new();
-
-                for (int i = 0; i < 50; i++) // определ€ть длину столбца автоматически
+                for (int i = 0; i < 50; i++) // сделать определение длины столбца автоматической
                 {
                     Array containersFromFileArray = (Array)containersRange.Value;
                     string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
@@ -113,6 +109,7 @@ namespace ContSealApp
                 Application.DoEvents();
                 objExcel.Quit();
             }
+            return containersFromFileList;
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
