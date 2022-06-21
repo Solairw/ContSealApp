@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ namespace ContSealApp
 
             try
             {
-                InputTextSplitToContainerNumbersAndWeights(inputBox.Text);
+                Compare();
             }
             catch (FormatException ex)
             {
@@ -38,9 +39,9 @@ namespace ContSealApp
             }
             totalContainersBox.Text += outputBox.Lines.Length - 1;
         }
-        public void InputTextSplitToContainerNumbersAndWeights(string inputTextFromClient)
+        public object InputTextSplitToContainerNumbersAndWeights()
         {
-            inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
+            string inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             string[] inputList = inputTextFromClient.Split('\n');
             string[] inputContainersList = new string[inputList.Length];
             string[] inputWeightsList = new string[inputList.Length];
@@ -58,26 +59,7 @@ namespace ContSealApp
                 ContainerFromClient containerFromClient = new(n, inputContainersList[n], inputWeightsList[n]);
                 containersFromClientList.Add(containerFromClient);
             }
-            
-            object firstContainerInListNumber = containersFromClientList[0].ContainerNumber;
-            object secondContainerInListWeight = containersFromClientList[1].ContainerWeight;
-            object firstContainerInListWeight = containersFromClientList[0].ContainerWeight;
-            
-            outputBox.Text += $"{firstContainerInListNumber} - {secondContainerInListWeight}\r\n";
-            
-            if(secondContainerInListWeight != firstContainerInListWeight)
-            {
-                outputBox.Text += "True";
-            }
-            else
-            {
-                outputBox.Text += "False";
-            }
-
-            var testVar = containersFromClientList.Where(p => p.ContainerNumber.Length > 11);
-            
-            var a = ReadFromExcel();
-            outputBox.Text += a;
+            return containersFromClientList;
         }
         public object ReadFromExcel()
         {
@@ -110,6 +92,13 @@ namespace ContSealApp
                 objExcel.Quit();
             }
             return containersFromFileList;
+        }
+        public void Compare()
+        {
+            var containersFromClientList = InputTextSplitToContainerNumbersAndWeights();
+            var containersFromFileList = ReadFromExcel();
+
+            var result = containersFromClientList.Equals(containersFromFileList);
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
