@@ -96,7 +96,12 @@ namespace ContSealApp
         public void Test(List<Container> containersFromClientList, List<Container> containersFromFileList)
         {
             var result = containersFromClientList.Union(containersFromFileList);
-            //запись в новую коллекцию
+
+            var result1 = from i in result
+                         orderby i.ContainerNumber descending
+                         select i;
+            foreach (object i in containersFromClientList)
+                outputBox.Text += i;
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
