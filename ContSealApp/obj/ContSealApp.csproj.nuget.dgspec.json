@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {}
+    "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {
+    "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
         "projectName": "ContSealApp",
-        "projectPath": "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+        "projectPath": "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
+        "outputPath": "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
