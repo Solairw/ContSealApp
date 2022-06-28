@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ljDoOh0hTx0orp4vFKJUn/qXfBUJLr5ukPZf+9e+Z9MayfjpD05YCCjPNuI+RxaoOJVJK2T7R9y5xMlYX/NdKA==",
+  "dgSpecHash": "Q4vnnZpY22vsjSjJRtfKy9AQ9zHA9rgdKGbe4vUWlwMwI8iwVULQ9Kss5fuCAk50yQlxZvQoYn04LnCiOLehvg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Source\\Repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
+  "projectFilePath": "C:\\Users\\user\\source\\repos\\Si02Vl\\ContSealApp\\ContSealApp\\ContSealApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

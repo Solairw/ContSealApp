@@ -55,7 +55,7 @@
             this.inputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.inputBox.Size = new System.Drawing.Size(215, 467);
             this.inputBox.TabIndex = 1;
-            this.inputBox.Text = "CLHU3902470 22.4\r\nTCLU3172470 22.34\r\nFESU2114840 22.35\r\nFICU3552444 20.55";
+            this.inputBox.Text = "TRHU1760959 22.4\r\nTCLU3172470 22.34\r\nFESU2109587 22.35\r\nFICU3552444 20.55";
             // 
             // startButton
             // 

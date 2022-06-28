@@ -10,14 +10,12 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Data.SqlClient;
+using System.Reflection;
 
 namespace ContSealApp
 {
     public partial class InputForm1 : Form
     {
-        string[] containersFromFile;
-        string[] sealsFromFile;
-
         public InputForm1()
         {
             InitializeComponent();
@@ -31,7 +29,7 @@ namespace ContSealApp
 
             try
             {
-                Compare();
+                CompareContainers(InputTextSplitToContainerNumbersAndWeights(), ReadFromExcel());
             }
             catch (FormatException ex)
             {
@@ -44,26 +42,28 @@ namespace ContSealApp
             string inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             string[] inputList = inputTextFromClient.Split('\n');
             string[] inputContainersList = new string[inputList.Length];
-            string[] inputWeightsList = new string[inputList.Length];
+            double[] inputWeightsList = new double[inputList.Length];
+
+            //double[] outputWeightList = inputWeightsList.Select(s => Double.Parse(s)).ToArray();
 
             int weightMultiplier = int.Parse(weightMultiplierValueBox.Text);
 
-            List<ContainerFromClient> containersFromClientList = new();//добавл€ем экземпл€р класса
+            List<Container> containersFromClientList = new();
 
             for (int n = 0; n < inputList.Length; n++)
             {
                 string[] temp1 = inputList[n].Split(new char[] { ' ', '\t' });
                 inputContainersList[n] = temp1[0];
-                inputWeightsList[n] = temp1[1];
+                inputWeightsList[n] = Double.Parse(temp1[1]) * weightMultiplier;
 
-                ContainerFromClient containerFromClient = new(n, inputContainersList[n], inputWeightsList[n]);
+                Container containerFromClient = new(n, inputContainersList[n], "None", inputWeightsList[n]);
                 containersFromClientList.Add(containerFromClient);
             }
             return containersFromClientList;
         }
         public object ReadFromExcel()
         {
-            List<ContainerFromFile> containersFromFileList = new();
+            List<Container> containersFromFileList = new();
 
             //ќткрываем файл Ёксел€
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -85,7 +85,7 @@ namespace ContSealApp
                     string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox2.Text += $"{sealsFromFile[i]}\n";
 
-                    ContainerFromFile containerFromFile = new(i, containersFromFile[i], sealsFromFile[i]);
+                    Container containerFromFile = new(i, containersFromFile[i], sealsFromFile[i], 0.0);
                     containersFromFileList.Add(containerFromFile);
                 }
                 Application.DoEvents();
@@ -93,12 +93,9 @@ namespace ContSealApp
             }
             return containersFromFileList;
         }
-        public void Compare()
+        public void CompareContainers(List<Container> containersFromClientList, List<Container> containersFromFileList)
         {
-            var containersFromClientList = InputTextSplitToContainerNumbersAndWeights();
-            var containersFromFileList = ReadFromExcel();
-
-            var result = containersFromClientList.Equals(containersFromFileList);
+            var result = containersFromClientList.Union(containersFromFileList);
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
@@ -195,34 +192,19 @@ namespace ContSealApp
         //    dbStatusBox.Text += $"\r\nProgram is closed";
         }
     }
-    public class ContainerFromClient
+    public class Container
     {
-        public int ID;
-        public string ContainerNumber;
-        public string ContainerWeight;
-        public string ContainerSeal;
+        public int ID { get; set; }
+        public string ContainerNumber { get; set; }
+        public string ContainerSeal { get; set; }
+        public double ContainerWeight { get; set; }
 
-        public ContainerFromClient(int id, string containerNumber, string containerWeight)
+        public Container(int id, string containerNumber, string containerSeal, double containerWeight)
         {
             ID = id;
             ContainerNumber = containerNumber;
-            ContainerWeight = containerWeight;
-            ContainerSeal = "None";
-        }
-    }
-    public class ContainerFromFile
-    {
-        public int ID;
-        public string ContainerNumber;
-        public string ContainerWeight;
-        public string ContainerSeal;
-
-        public ContainerFromFile(int id, string containerNumber, string containerSeal)
-        {
-            ID = id;
-            ContainerNumber = containerNumber;
-            ContainerWeight = "None";
             ContainerSeal = containerSeal;
+            ContainerWeight = containerWeight;
         }
     }
 }
