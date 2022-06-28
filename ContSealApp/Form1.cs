@@ -29,7 +29,7 @@ namespace ContSealApp
 
             try
             {
-                CompareContainers(InputTextSplitToContainerNumbersAndWeights(), ReadFromExcel());
+                Test(InputTextSplitToContainerNumbersAndWeights(), GetInfoFromExcel());
             }
             catch (FormatException ex)
             {
@@ -37,7 +37,7 @@ namespace ContSealApp
             }
             totalContainersBox.Text += outputBox.Lines.Length - 1;
         }
-        public object InputTextSplitToContainerNumbersAndWeights()
+        public List<Container> InputTextSplitToContainerNumbersAndWeights()
         {
             string inputTextFromClient = Regex.Replace(inputBox.Text, @"\.", ",").Trim();
             string[] inputList = inputTextFromClient.Split('\n');
@@ -61,7 +61,7 @@ namespace ContSealApp
             }
             return containersFromClientList;
         }
-        public object ReadFromExcel()
+        public List<Container> GetInfoFromExcel()
         {
             List<Container> containersFromFileList = new();
 
@@ -93,9 +93,11 @@ namespace ContSealApp
             }
             return containersFromFileList;
         }
-        public void CompareContainers(List<Container> containersFromClientList, List<Container> containersFromFileList)
+        public void Test(List<Container> containersFromClientList, List<Container> containersFromFileList)
         {
             var result = containersFromClientList.Union(containersFromFileList);
+            List<Container> resultList= new();
+            resultList.Add(result);
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
