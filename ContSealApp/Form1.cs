@@ -78,7 +78,7 @@ namespace ContSealApp
                 for (int i = 0; i < 50; i++) // сделать определение длины столбца автоматической
                 {
                     var containersFromFileArray = containersRange.Value;
-                    string?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    var?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox1.Text += $"{containersFromFile[i]}\n";
 
                     var sealsFromFileArray = sealsRange.Value;
