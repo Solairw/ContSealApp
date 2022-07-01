@@ -70,10 +70,10 @@ namespace ContSealApp
             {
                 //Создаём приложение.
                 Excel.Application objExcel = new();
-                Excel.Workbook objWorkBook = objExcel.Workbooks.Open(openFileDialog1.FileName);
-                Excel.Worksheet objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
-                Excel.Range containersRange = objWorkSheet.UsedRange.Columns["A"];
-                Excel.Range sealsRange = objWorkSheet.UsedRange.Columns["B"];
+                var objWorkBook = objExcel.Workbooks.Open(openFileDialog1.FileName);
+                var objWorkSheet = (Excel.Worksheet)objWorkBook.Sheets[1];
+                var containersRange = objWorkSheet.UsedRange.Columns["A"];
+                var sealsRange = objWorkSheet.UsedRange.Columns["B"];
 
                 for (int i = 0; i < 50; i++) // сделать определение длины столбца автоматической
                 {
