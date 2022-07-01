@@ -77,12 +77,12 @@ namespace ContSealApp
 
                 for (int i = 0; i < 50; i++) // сделать определение длины столбца автоматической
                 {
-                    var containersFromFileArray = containersRange.Value;
-                    var?[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    var containersFromFileArray = (Array)containersRange.Value;
+                    string[] containersFromFile = containersFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox1.Text += $"{containersFromFile[i]}\n";
 
-                    var sealsFromFileArray = sealsRange.Value;
-                    string?[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
+                    var sealsFromFileArray = (Array)sealsRange.Value;
+                    string[] sealsFromFile = sealsFromFileArray.OfType<object>().Select(o => o.ToString()).ToArray();
                     testBox2.Text += $"{sealsFromFile[i]}\n";
 
                     Container containerFromFile = new(i, containersFromFile[i], sealsFromFile[i], 0.0);
@@ -96,12 +96,10 @@ namespace ContSealApp
         public void Test(List<Container> containersFromClientList, List<Container> containersFromFileList)
         {
             var result = containersFromClientList.Union(containersFromFileList);
-
-            var result1 = from i in result
-                         orderby i.ContainerNumber descending
-                         select i;
-            foreach (object i in containersFromClientList)
-                outputBox.Text += i;
+            var sortedResult = from p in result
+                               orderby p.ContainerNumber
+                               select p;
+            outputBox.Text += sortedResult;
         }
         public void WriteToExcel_Click(object sender, EventArgs e)
         {
